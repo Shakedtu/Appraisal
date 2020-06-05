@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import { ConfigProvider } from 'antd';
 import * as serviceWorker from './serviceWorker';
+import './i18n';
 import heIL from 'antd/es/locale/he_IL'
 
 ReactDOM.render(

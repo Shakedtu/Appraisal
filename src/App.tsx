@@ -1,12 +1,16 @@
 import React from 'react';
-import { Button } from 'antd';
 import './App.css';
+import { Button } from 'antd'
+import { useTranslation } from 'react-i18next';
 
 
-const App = () => (
-  <div className="App">
-    <Button type="primary">Button</Button>
-  </div>
-);
+const App = () => {
+  const { t } = useTranslation();
+  return (
+    <div className="App">
+      <Button type="primary">{t('button')}</Button>
+    </div>
+  )
+};
 
 export default App;
