@@ -55,5 +55,6 @@
     "@types/node": "^12.12.44",
     "webpack-bundle-analyzer": "^3.8.0"
   },
-  "proxy": "http://localhost:5000"
+  "proxy": "http://localhost:5000",
+  "secure": false
 }
