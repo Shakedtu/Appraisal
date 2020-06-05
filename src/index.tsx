@@ -2,11 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import { ConfigProvider } from 'antd';
 import * as serviceWorker from './serviceWorker';
+import heIL from 'antd/es/locale/he_IL'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ConfigProvider locale={heIL} direction='rtl'>
+      <App />
+    </ConfigProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
