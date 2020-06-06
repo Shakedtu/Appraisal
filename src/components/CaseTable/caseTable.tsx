@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table } from 'antd';
+import { Table, Input } from 'antd';
 import {useTranslation} from "react-i18next";
 
 interface TableData {
@@ -10,8 +10,9 @@ interface TableData {
     clientName: string;
 }
 
-const FileTable: React.FunctionComponent = () => {
+const CaseTable: React.FunctionComponent = () => {
     const { t } = useTranslation();
+    const {Search} = Input;
     const columnsKeys = ['id', 'insurer','status', 'openDate', 'clientName'];
     const columns = columnsKeys.map(column => ({
         title: t(`file-table.header.column.${column}`),
@@ -36,12 +37,18 @@ const FileTable: React.FunctionComponent = () => {
     ] //TODO: fetch real data
 
     return (
+        <>
+        <Search
+            placeholder={t('file-table.search.placeholder')}
+        />
         <Table
             columns={columns}
             dataSource={data}
+            bordered
         />
+        </>
     )
 
 }
 
-export default FileTable;
+export default CaseTable;

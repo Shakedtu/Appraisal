@@ -5,5 +5,10 @@
     "file-table.header.column.insurer": "מבוטח (עסק/חברה)",
     "file-table.header.column.status": "מצב תיק",
     "file-table.header.column.openDate": "תאריך פתיחה",
-    "file-table.header.column.clientName": "שם לקוח"
+    "file-table.header.column.clientName": "שם לקוח",
+    "file-table.search.placeholder": "חפש תיק",
+    "case.menu.item.contact-info": "פרטי תיק ואנשי קשר",
+    "case.menu.item.more-info": "נתונים נוספים",
+    "case.menu.item.bill-info": "חשבון תיק",
+    "case.menu.item.documents": "מסמכים"
 }

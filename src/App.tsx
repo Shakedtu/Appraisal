@@ -2,7 +2,8 @@ import React from 'react';
 import './App.scss';
 import { Layout, Typography } from 'antd'
 import { useTranslation } from 'react-i18next';
-import FileTable from './components/FileLIst/fileTable';
+import CaseTable from './components/CaseTable/caseTable';
+import Case from "./components/Case/Case";
 
 
 const App = () => {
@@ -15,7 +16,8 @@ const App = () => {
         <Title>{t('header.title')}</Title>
       </Header>
       <Content>
-        <FileTable />
+          <CaseTable />
+          <Case />
       </Content>
     </div>
   )
