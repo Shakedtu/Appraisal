@@ -1,4 +1,9 @@
 {
     "header.title": "כותרת",
-    "button": "כפתור"
+    "button": "כפתור",
+    "file-table.header.column.ID": "מספר תיק",
+    "file-table.header.column.insurer": "מבוטח (עסק/חברה)",
+    "file-table.header.column.status": "מצב תיק",
+    "file-table.header.column.open-date": "תאריך פתיחה",
+    "file-table.header.column.client-name": "שם לקוח"
 }
