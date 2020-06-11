@@ -16,8 +16,8 @@ const App = () => {
         <Title>{t('header.title')}</Title>
       </Header>
       <Content>
-          <CaseTable />
-          <Case />
+        <CaseTable />
+        <Case />
       </Content>
     </div>
   )
