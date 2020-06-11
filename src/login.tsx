@@ -18,10 +18,9 @@ const startLogin = async () => {
     try {
         const {user, credential}: firebase.auth.UserCredential = await firebase.auth().signInWithPopup(provider);
         const token = credential?.['accessToken'];
-        const response = await axios.post('/auth', {
-            user
-        }, { headers: { Authorization: `Bearer ${ token }` }})
-        console.log(response);
+        await axios.post('/auth', { user },
+            { headers: { Authorization: `Bearer ${ token }` }})
+        console.log('success')
     }
     catch (error) {
         console.log('error: ', error);

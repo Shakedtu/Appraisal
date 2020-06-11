@@ -10,5 +10,6 @@
     "case.menu.item.contact-info": "פרטי תיק ואנשי קשר",
     "case.menu.item.more-info": "נתונים נוספים",
     "case.menu.item.bill-info": "חשבון תיק",
-    "case.menu.item.documents": "מסמכים"
+    "case.menu.item.documents": "מסמכים",
+    "case.header.title": "מבוטח {{name}}"
 }

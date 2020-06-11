@@ -12,7 +12,7 @@ var app = express();
 app.post('/auth', function (req, res) {
   const token = req.header('Authorization').replace('Bearer ', '');
   axios
-    .post('https://graph.microsoft.com/v1.0/me', {
+    .get('https://graph.microsoft.com/v1.0/me', {
       headers: { Authorization: `Bearer ${ token }` }
     })
     .then((response) => {

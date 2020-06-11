@@ -50,7 +50,7 @@
     "eject": "react-scripts eject",
     "server": "node ./src/server/index.ts",
     "dev": "run-p server:dev start",
-    "server:dev": "node ./src/server/index.ts"
+    "server:dev": "nodemon ./src/server/index.ts"
   },
   "eslintConfig": {
     "extends": "react-app"

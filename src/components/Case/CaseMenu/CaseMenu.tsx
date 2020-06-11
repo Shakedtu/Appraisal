@@ -11,19 +11,19 @@ const CaseMenu: FunctionComponent = () => {
             <PageHeader
                 className="site-page-header"
                 onBack={() => null}
-                title="מבוטח ישראל ישראלי"
+                title={t("case.header.title", {name: 'ישראלי אלי'})}
             />
             <Menu mode='horizontal'>
-                <Menu.Item icon={<SolutionOutlined />}>
+                <Menu.Item icon={<SolutionOutlined />} key='contactInfo'>
                     {t('case.menu.item.contact-info')}
                 </Menu.Item>
-                <Menu.Item icon={<SolutionOutlined />}>
+                <Menu.Item icon={<SolutionOutlined />} key='moreInfo'>
                     {t('case.menu.item.more-info')}
                 </Menu.Item>
-                <Menu.Item icon={<BankOutlined />}>
+                <Menu.Item icon={<BankOutlined />} key='billInfo'>
                     {t('case.menu.item.bill-info')}
                 </Menu.Item>
-                <Menu.Item icon={<FileOutlined />}>
+                <Menu.Item icon={<FileOutlined />} key='documents'>
                     {t('case.menu.item.documents')}
                 </Menu.Item>
             </Menu>

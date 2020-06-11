@@ -3,6 +3,7 @@ import { Table, Input } from 'antd';
 import {useTranslation} from "react-i18next";
 
 interface TableData {
+    key?: string;
     id: string;
     insurer: string;
     status: string;
@@ -21,6 +22,7 @@ const CaseTable: React.FunctionComponent = () => {
     }))
     const data: TableData[] = [
         {
+            key: '1',
             id: '1',
             insurer: 'מבוטח כלשהו',
             status: 'פתוח',
@@ -28,6 +30,7 @@ const CaseTable: React.FunctionComponent = () => {
             clientName: 'מנורה'
         },
         {
+            key: '2',
             id: '2',
             insurer: "עוד אחד",
             status: "סגור",
