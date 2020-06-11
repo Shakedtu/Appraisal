@@ -12,45 +12,27 @@ const config = {
 
 firebase.initializeApp(config);
 
-var provider = new firebase.auth.OAuthProvider('microsoft.com');
-provider.addScope('profile');
+const provider = new firebase.auth.OAuthProvider('microsoft.com');
 
-const startLogin = () => {
-  firebase.auth().signInWithPopup(provider)
-    .then(function (result: firebase.auth.UserCredential) {
-      if (result === null) return;
-      if (result.credential === null) return;
-      const token = result.credential["accessToken"];
-      // // The signed-in user info.
-      const user = result.user;
-      axios.post('/auth', {
-        user: user
-      }, {
-        headers: { Authorization: `Bearer ${ token }` }
-      })
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }).catch(function (error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      // The email of the user's account used.
-      var email = error.email;
-      // The firebase.auth.AuthCredential type that was used.
-      var credential = error.credential;
-      // ...
-    });
+const startLogin = async () => {
+    try {
+        const {user, credential}: firebase.auth.UserCredential = await firebase.auth().signInWithPopup(provider);
+        const token = credential?.['accessToken'];
+        const response = await axios.post('/auth', {
+            user
+        }, { headers: { Authorization: `Bearer ${ token }` }})
+        console.log(response);
+    }
+    catch (error) {
+        console.log('error: ', error);
+    }
 }
 
 const Login = () => {
-  var authed = false;
   provider.setCustomParameters({
     tenant: "4d237583-6e63-43c9-ab9c-4b10fac8a63e"
   });
+  provider.addScope('profile');
   provider.addScope('mail.read');
   provider.addScope('calendars.read');
   return (
