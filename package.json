@@ -43,7 +43,8 @@
   },
   "scripts": {
     "analyze": "source-map-explorer 'build/static/js/*.js'",
-    "start": "craco start",
+    "prettier": "prettier --single-quote --write '{**/*,*}.{ts,tsx}'",
+    "start": "npm run prettier && craco start",
     "build": "craco build",
     "test": "craco test",
     "deploy": "npm run build && firebase deploy",
@@ -70,6 +71,7 @@
   "devDependencies": {
     "@types/node": "^12.12.44",
     "nodemon": "^2.0.4",
+    "prettier": "2.0.5",
     "webpack-bundle-analyzer": "^3.8.0"
   },
   "proxy": "http://localhost:5000",
