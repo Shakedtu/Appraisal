@@ -1,13 +1,12 @@
-import {lazy, LazyExoticComponent} from "react";
+import { lazy, LazyExoticComponent } from 'react';
 
 export interface AppPage {
-    id: string;
-    path: string;
-    component: LazyExoticComponent<any>;
+  id: string;
+  path: PagesRoutes;
+  component: LazyExoticComponent<any>;
 }
 
-export const PagesRoutes = {
-    caseTable: '/',
-    contactInfo: '/contact-info',
-
+export enum PagesRoutes {
+  CASE_TABLE = '/',
+  CASE = '/case/:id',
 }

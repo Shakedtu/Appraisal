@@ -1,34 +1,80 @@
 import React, { FunctionComponent } from 'react';
 import { Menu, PageHeader } from 'antd';
-import { SolutionOutlined, BankOutlined, FileOutlined } from '@ant-design/icons'
-import { useTranslation } from "react-i18next";
-import './CaseMenu.scss'
+import {
+  SolutionOutlined,
+  BankOutlined,
+  FileOutlined,
+} from '@ant-design/icons';
+import { useHistory } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import './CaseMenu.scss';
 
-const CaseMenu: FunctionComponent = () => {
-    const { t } = useTranslation()
-    return (
-        <>
-            <PageHeader
-                className="site-page-header"
-                onBack={() => null}
-                title={t("case.header.title", {name: 'ישראלי אלי'})}
-            />
-            <Menu mode='horizontal'>
-                <Menu.Item icon={<SolutionOutlined />} key='contactInfo'>
-                    {t('case.menu.item.contact-info')}
-                </Menu.Item>
-                <Menu.Item icon={<SolutionOutlined />} key='moreInfo'>
-                    {t('case.menu.item.more-info')}
-                </Menu.Item>
-                <Menu.Item icon={<BankOutlined />} key='billInfo'>
-                    {t('case.menu.item.bill-info')}
-                </Menu.Item>
-                <Menu.Item icon={<FileOutlined />} key='documents'>
-                    {t('case.menu.item.documents')}
-                </Menu.Item>
-            </Menu>
-        </>
-    )
+export interface MenuTabProps {
+  key: string;
+  icon: React.ReactNode;
+  text: string;
 }
+
+export enum CaseMenuTabs {
+  CONTACT_INFO = 'contact-info',
+  MORE_INFO = 'more-info',
+  BILL_INFO = 'bill-info',
+  DOCUMENTS = 'documents',
+}
+interface CaseMenuProps {
+  selectedTab: CaseMenuTabs;
+  onSelect;
+}
+
+const CaseMenu: FunctionComponent<CaseMenuProps> = ({
+  selectedTab,
+  onSelect,
+}) => {
+  const { t } = useTranslation();
+  const history = useHistory();
+  const onBack = () => history.goBack();
+  const MenuTabs: MenuTabProps[] = [
+    {
+      key: CaseMenuTabs.CONTACT_INFO,
+      icon: <SolutionOutlined />,
+      text: t('case.menu.item.contact-info'),
+    },
+    {
+      key: CaseMenuTabs.MORE_INFO,
+      icon: <SolutionOutlined />,
+      text: t('case.menu.item.more-info'),
+    },
+    {
+      key: CaseMenuTabs.BILL_INFO,
+      icon: <BankOutlined />,
+      text: t('case.menu.item.bill-info'),
+    },
+    {
+      key: CaseMenuTabs.DOCUMENTS,
+      icon: <FileOutlined />,
+      text: t('case.menu.item.documents'),
+    },
+  ];
+
+  const MenuTab = ({ key, icon, text }) => {
+    return (
+      <Menu.Item icon={icon} key={key}>
+        {text}
+      </Menu.Item>
+    );
+  };
+  return (
+    <>
+      <PageHeader
+        className="site-page-header"
+        onBack={onBack}
+        title={t('case.header.title', { name: 'ישראלי אלי' })}
+      />
+      <Menu mode="horizontal" selectedKeys={[selectedTab]} onSelect={onSelect}>
+        {MenuTabs.map((tab) => MenuTab(tab))}
+      </Menu>
+    </>
+  );
+};
 
 export default CaseMenu;

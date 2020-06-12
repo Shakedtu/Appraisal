@@ -1,4 +1,3 @@
-
 // Register Callbacks for Redirect flow
 // myMSALObj.handleRedirectCallback(authRedirectCallBack);
 

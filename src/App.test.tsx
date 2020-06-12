@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
-  value: jest.fn().mockImplementation(query => ({
+  value: jest.fn().mockImplementation((query) => ({
     matches: false,
     media: query,
     onchange: null,
@@ -21,4 +21,4 @@ test('renders title', () => {
   render(<App />);
 
   expect(screen.findByText('header.title')).toBeDefined();
-})
+});

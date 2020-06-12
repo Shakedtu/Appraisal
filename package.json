@@ -48,7 +48,6 @@
     "build": "craco build",
     "test": "craco test",
     "deploy": "npm run build && firebase deploy",
-    "eject": "react-scripts eject",
     "server": "node ./src/server/index.ts",
     "dev": "run-p server:dev start",
     "server:dev": "nodemon ./src/server/index.ts"
