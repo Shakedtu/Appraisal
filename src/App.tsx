@@ -30,7 +30,9 @@ const App = () => {
   return (
     <div className="App">
       <Header>
-        <Title>{t('header.title')}</Title>
+        <Title code style={{ color: 'white' }}>
+          {t('header.title')}
+        </Title>
       </Header>
       <Content>
         <BrowserRouter>

@@ -12,7 +12,7 @@ ReactDOM.render(
   <React.StrictMode>
     <ConfigProvider locale={heIL} direction="rtl">
       <Login />
-      {/* <App /> */}
+      <App />
     </ConfigProvider>
   </React.StrictMode>,
   document.getElementById('root')

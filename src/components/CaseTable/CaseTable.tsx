@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Input } from 'antd';
+import { Table, Input, Typography } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
@@ -25,7 +25,11 @@ const CaseTable: React.FunctionComponent = () => {
     if (column === 'id') {
       result = {
         ...result,
-        render: (id) => <Link to={`/case/${id}`}>{id}</Link>,
+        render: (id) => (
+          <Link to={`/case/${id}`} component={Typography.Link}>
+            {id}
+          </Link>
+        ),
       };
     }
     return result;

@@ -1,17 +1,17 @@
 const axios = require('axios');
 
-const authenticate = (req, res) => {
+const authenticate = async (req, res) => {
   const token = req.header('Authorization').replace('Bearer ', '');
-  axios
-    .get('https://graph.microsoft.com/v1.0/me', {
-      headers: { Authorization: `Bearer ${ token }` },
-    })
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  try {
+    const response = await axios.get(
+      'https://graph.microsoft.com/v1.0/me/drive',
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+  } catch (e) {
+    console.log(e.response.data.error);
+  }
 };
 
 module.exports = authenticate;
