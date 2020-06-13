@@ -45,13 +45,8 @@ const App = () => {
         <BrowserRouter>
           <Suspense fallback={<div>loading</div>}>
             <Switch>
-              {Pages.map((appPage) => (
-                <Route
-                  exact
-                  key={appPage.id}
-                  path={appPage.path}
-                  component={appPage.component}
-                />
+              {Pages.map(({ id, path, component }: AppPage) => (
+                <Route exact key={id} path={path} component={component} />
               ))}
             </Switch>
           </Suspense>

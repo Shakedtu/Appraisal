@@ -6,6 +6,7 @@ const authenticate = async (req, res) => {
     const response = await axios.get('https://graph.microsoft.com/v1.0/me', {
       headers: { Authorization: `Bearer ${token}` },
     });
+    console.log(response);
     res.send('success');
   } catch (e) {
     console.log(e.response.data.error);
