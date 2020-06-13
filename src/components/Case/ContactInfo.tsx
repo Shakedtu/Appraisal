@@ -1,5 +1,4 @@
-import React, { FunctionComponent, useState } from 'react';
-import { Descriptions, Typography } from 'antd';
+import React, { FunctionComponent } from 'react';
 import { CaseMenuTabs } from './CaseMenu/CaseMenu';
 
 interface Contact {
@@ -12,19 +11,6 @@ interface Contact {
 }
 
 const ContactInfo: FunctionComponent<{ tab: CaseMenuTabs }> = (props) => {
-  const { Text } = Typography;
-  const [contacts, setContacts] = useState<Contact[]>([]);
-
-  const addContact = (contact: Contact) => {
-    setContacts((currentContact) => [...currentContact, contact]);
-  };
-
-  const removeContact = (contact: Contact) => {
-    setContacts((currentContact) =>
-      currentContact.filter((c) => c.id !== contact.id)
-    );
-  };
-
   return <>{props.tab}</>;
 };
 

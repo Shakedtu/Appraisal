@@ -1,4 +1,4 @@
-import { lazy, LazyExoticComponent } from 'react';
+import { LazyExoticComponent } from 'react';
 
 export interface AppPage {
   id: string;

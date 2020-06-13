@@ -6,7 +6,6 @@ import { WindowsFilled } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import MicrosoftProvider from '../Providers/MicrosoftProvider';
-import dotenv from 'dotenv';
 import config from '../firebaseConfig.json';
 
 firebase.initializeApp(config);
@@ -23,7 +22,7 @@ const startLogin = async (history) => {
     await axios.post(
       '/auth',
       { user },
-      { headers: { Authorization: `Bearer ${ token }` } }
+      { headers: { Authorization: `Bearer ${token}` } }
     );
     history.push('/cases');
   } catch (error) {

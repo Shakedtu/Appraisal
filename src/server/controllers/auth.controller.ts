@@ -1,11 +1,10 @@
-const axios = require('axios');
+const OneDriveAdapter = require('../Adapters/OneDriveAdapter.ts')
 
 const authenticate = async (req, res) => {
   const token = req.header('Authorization').replace('Bearer ', '');
+  const oneDrive = new OneDriveAdapter();
   try {
-    const response = await axios.get('https://graph.microsoft.com/v1.0/me', {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const response = await oneDrive.getDrive(token);
     console.log(response);
     res.send('success');
   } catch (e) {
