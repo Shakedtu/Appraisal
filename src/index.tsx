@@ -11,8 +11,8 @@ import Login from './login';
 ReactDOM.render(
   <React.StrictMode>
     <ConfigProvider locale={heIL} direction="rtl">
-      {/*<Login />*/}
-      <App />
+      <Login />
+      {/* <App /> */}
     </ConfigProvider>
   </React.StrictMode>,
   document.getElementById('root')
