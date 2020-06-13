@@ -5,15 +5,8 @@ import { Button } from 'antd';
 import { WindowsOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
-
-const config = {
-  apiKey: 'AIzaSyAS91XPmhjwEBUP7Edni69_s4kJ9KlcBEA',
-  authDomain: 'appraisal-d63ea.firebaseapp.com',
-  databaseURL: 'https://appraisal-d63ea.firebaseio.com',
-  projectId: 'appraisal-d63ea',
-  storageBucket: 'appraisal-d63ea.appspot.com',
-  messagingSenderId: 684392560190,
-};
+import dotenv from 'dotenv';
+import config from '../firebaseConfig.json';
 
 firebase.initializeApp(config);
 
@@ -31,7 +24,7 @@ const startLogin = async (history) => {
     await axios.post(
       '/auth',
       { user },
-      { headers: { Authorization: `Bearer ${token}` } }
+      { headers: { Authorization: `Bearer ${ token }` } }
     );
     history.push('/cases');
   } catch (error) {
