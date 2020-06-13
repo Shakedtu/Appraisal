@@ -7,6 +7,7 @@ export interface AppPage {
 }
 
 export enum PagesRoutes {
-  CASE_TABLE = '/',
+  HOME = '/',
+  CASE_TABLE = '/cases',
   CASE = '/case/:id',
 }

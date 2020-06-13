@@ -11,5 +11,6 @@
   "case.menu.item.more-info": "נתונים נוספים",
   "case.menu.item.bill-info": "חשבון תיק",
   "case.menu.item.documents": "מסמכים",
-  "case.header.title": "מבוטח {{name}}"
+  "case.header.title": "מבוטח {{name}}",
+  "login_page.login": "התחבר עם מיקרוסופט"
 }

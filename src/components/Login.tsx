@@ -1,6 +1,11 @@
 import React from 'react';
 import * as firebase from 'firebase';
 import axios from 'axios';
+import { Button } from 'antd';
+import { WindowsOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
+import { useHistory } from 'react-router-dom';
+
 const config = {
   apiKey: 'AIzaSyAS91XPmhjwEBUP7Edni69_s4kJ9KlcBEA',
   authDomain: 'appraisal-d63ea.firebaseapp.com',
@@ -14,7 +19,7 @@ firebase.initializeApp(config);
 
 const provider = new firebase.auth.OAuthProvider('microsoft.com');
 
-const startLogin = async () => {
+const startLogin = async (history) => {
   try {
     const {
       user,
@@ -28,13 +33,15 @@ const startLogin = async () => {
       { user },
       { headers: { Authorization: `Bearer ${token}` } }
     );
-    console.log('success');
+    history.push('/cases');
   } catch (error) {
     console.log('error: ', error);
   }
 };
 
 const Login = () => {
+  const { t } = useTranslation();
+  const history = useHistory();
   provider.setCustomParameters({
     tenant: '4d237583-6e63-43c9-ab9c-4b10fac8a63e',
   });
@@ -44,9 +51,13 @@ const Login = () => {
   provider.addScope('offline_access');
   return (
     <div>
-      <button className="button" onClick={startLogin}>
-        Login with MS
-      </button>
+      <Button
+        className="button"
+        onClick={() => startLogin(history)}
+        icon={<WindowsOutlined />}
+      >
+        {t('login_page.login')}
+      </Button>
     </div>
   );
 };

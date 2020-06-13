@@ -2,7 +2,7 @@ import React, { lazy, Suspense } from 'react';
 import './App.scss';
 import { Layout, Typography } from 'antd';
 import { useTranslation } from 'react-i18next';
-import { Switch, Route, BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { AppPage, PagesRoutes } from './components/AppRouter/AppRouterConst';
 
 const App = () => {
@@ -23,6 +23,13 @@ const App = () => {
       path: PagesRoutes.CASE,
       component: lazy(() =>
         import(/* webpackPrefetch: true */ './components/Case/Case')
+      ),
+    },
+    {
+      id: 'home',
+      path: PagesRoutes.HOME,
+      component: lazy(() =>
+        import(/* webpackPreload: true */ './components/Login')
       ),
     },
   ];
