@@ -1,27 +1,11 @@
-var express = require('express');
-var logger = require('connect-logger');
-var cookieParser = require('cookie-parser');
-var session = require('cookie-session');
-var request = require('request');
-var axios = require('axios');
+const express = require('express');
+const axios = require('axios');
+const authRoutes = require('./routers/auth.router.ts');
 
-var port = 5000;
-var app = express();
-
-app.post('/auth', function (req, res) {
-  const token = req.header('Authorization').replace('Bearer ', '');
-  axios
-    .get('https://graph.microsoft.com/v1.0/me', {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-});
+const port = 5000;
+const app = express();
+app.use('/', authRoutes);
 
 app.listen(port, () => {
-  console.log(`Server is listening on port ${port}!`);
+  console.log(`Server is listening on port ${ port }!`);
 });
