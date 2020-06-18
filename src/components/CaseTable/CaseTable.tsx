@@ -15,25 +15,40 @@ interface TableData {
 const CaseTable: React.FunctionComponent = () => {
   const { t } = useTranslation();
   const { Search } = Input;
-  const columnsKeys = ['id', 'insurer', 'status', 'openDate', 'clientName'];
-  const columns = columnsKeys.map((column) => {
-    let result: any = {
-      title: t(`file-table.header.column.${column}`),
-      dataIndex: column,
-      key: column,
-    };
-    if (column === 'id') {
-      result = {
-        ...result,
-        render: (id) => (
-          <Link to={`/case/${id}`} component={Typography.Link}>
-            {id}
-          </Link>
-        ),
-      };
-    }
-    return result;
-  });
+  const columns = [
+    {
+      key: 'id',
+      dataIndex: 'id',
+      width: '10%',
+      title: t(`file-table.header.column.id`),
+      render: (id) => (
+        <Link to={`/case/${id}`} component={Typography.Link}>
+          {id}
+        </Link>
+      ),
+    },
+    {
+      key: 'insurer',
+      dataIndex: 'insurer',
+      title: t(`file-table.header.column.insurer`),
+    },
+    {
+      key: 'status',
+      dataIndex: 'status',
+      title: t(`file-table.header.column.status`),
+    },
+    {
+      key: 'openDate',
+      dataIndex: 'openDate',
+      title: t(`file-table.header.column.openDate`),
+    },
+    {
+      key: 'clientName',
+      dataIndex: 'clientName',
+      title: t(`file-table.header.column.clientName`),
+    },
+  ];
+
   const data: TableData[] = [
     {
       key: '1',

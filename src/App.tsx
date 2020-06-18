@@ -1,6 +1,6 @@
 import React, { lazy, Suspense } from 'react';
 import './App.scss';
-import { Layout, Typography } from 'antd';
+import { Layout, Typography, Spin } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { AppPage, PagesRoutes } from './components/AppRouter/AppRouterConst';
@@ -12,10 +12,17 @@ const App = () => {
 
   const Pages: AppPage[] = [
     {
+      id: 'home',
+      path: PagesRoutes.HOME,
+      component: lazy(() =>
+        import(/* webpackPreload: true */ './components/Login')
+      ),
+    },
+    {
       id: 'caseTable',
       path: PagesRoutes.CASE_TABLE,
       component: lazy(() =>
-        import(/* webpackPreload: true */ './components/CaseTable/CaseTable')
+        import(/* webpackPrefetch: true */ './components/CaseTable/CaseTable')
       ),
     },
     {
@@ -23,13 +30,6 @@ const App = () => {
       path: PagesRoutes.CASE,
       component: lazy(() =>
         import(/* webpackPrefetch: true */ './components/Case/Case')
-      ),
-    },
-    {
-      id: 'home',
-      path: PagesRoutes.HOME,
-      component: lazy(() =>
-        import(/* webpackPreload: true */ './components/Login')
       ),
     },
   ];
@@ -43,7 +43,7 @@ const App = () => {
       </Header>
       <Content>
         <BrowserRouter>
-          <Suspense fallback={<div>loading</div>}>
+          <Suspense fallback={<Spin />}>
             <Switch>
               {Pages.map(({ id, path, component }: AppPage) => (
                 <Route exact key={id} path={path} component={component} />

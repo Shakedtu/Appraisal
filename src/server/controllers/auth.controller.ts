@@ -1,4 +1,4 @@
-const OneDriveAdapter = require('../Adapters/OneDriveAdapter.ts')
+const OneDriveAdapter = require('../Adapters/OneDriveAdapter.ts');
 
 const authenticate = async (req, res) => {
   const token = req.header('Authorization').replace('Bearer ', '');
