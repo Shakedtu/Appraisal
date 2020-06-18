@@ -19,12 +19,13 @@ const startLogin = async (history) => {
       .auth()
       .signInWithPopup(MicrosoftProvider);
     const token = credential?.['accessToken'];
+    sessionStorage.setItem('token', token);
     await axios.post(
       '/auth',
       { user },
       { headers: { Authorization: `Bearer ${token}` } }
     );
-    history.push('/cases');
+    history.push('/test');
   } catch (error) {
     console.log('error: ', error);
   }

@@ -10,4 +10,5 @@ export enum PagesRoutes {
   HOME = '/',
   CASE_TABLE = '/cases',
   CASE = '/case/:id',
+  TEST_ENDPOINTS = '/test',
 }

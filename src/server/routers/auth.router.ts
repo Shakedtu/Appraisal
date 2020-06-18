@@ -4,3 +4,4 @@ const authRouter = require('express').Router();
 authRouter.route('/auth').post(auth);
 
 module.exports = authRouter;
+export {};

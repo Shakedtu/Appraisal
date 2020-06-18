@@ -32,6 +32,13 @@ const App = () => {
         import(/* webpackPrefetch: true */ './components/Case/Case')
       ),
     },
+    {
+      id: 'test',
+      path: PagesRoutes.TEST_ENDPOINTS,
+      component: lazy(() =>
+        import(/* webpackPreload: true */ './components/TestEndpoints')
+      ),
+    },
   ];
 
   return (
