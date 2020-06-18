@@ -12,5 +12,9 @@
   "case.menu.item.bill-info": "חשבון תיק",
   "case.menu.item.documents": "מסמכים",
   "case.header.title": "מבוטח {{name}}",
-  "login_page.login": "התחבר עם מיקרוסופט"
+  "login_page.login": "התחבר עם מיקרוסופט",
+  "server_test.create-file": "צור קובץ",
+  "server_test.create-folder": "צור תיקייה",
+  "server_test.delete": "מחיקה",
+  "server_test.search": "חיפוש"
 }
