@@ -1,10 +1,10 @@
 const OneDriveAdapter = require('../Adapters/OneDriveAdapter.ts');
 
-const getDrive = (req, res) => {
+const getDrive = async (req, res) => {
   const oneDrive = new OneDriveAdapter();
   const token = req.header('Authorization').replace('Bearer ', '');
   try {
-    const response = oneDrive.getFile(token);
+    const response = await oneDrive.getFile(token);
     console.log(response);
     res.send(response);
   } catch (e) {
@@ -13,12 +13,12 @@ const getDrive = (req, res) => {
   }
 };
 
-const getFile = (req, res) => {
+const getFile = async (req, res) => {
   const oneDrive = new OneDriveAdapter();
   const token = req.header('Authorization').replace('Bearer ', '');
   const path = req.body.path;
   try {
-    const response = oneDrive.getFile(token, path);
+    const response = await oneDrive.getFile(token, path);
     console.log(response);
     res.send(response);
   } catch (e) {
@@ -27,7 +27,7 @@ const getFile = (req, res) => {
   }
 };
 
-const createFile = (req, res) => {
+const createFile = async (req, res) => {
   const oneDrive = new OneDriveAdapter();
   const fileToCreate = {
     token: req.header('Authorization').replace('Bearer ', ''),
@@ -36,7 +36,7 @@ const createFile = (req, res) => {
     content: req.body.content,
   };
   try {
-    const response = oneDrive.createFile(fileToCreate);
+    const response = await oneDrive.createFile(fileToCreate);
     console.log(response);
     res.status(201).send(response);
   } catch (e) {
@@ -45,7 +45,7 @@ const createFile = (req, res) => {
   }
 };
 
-const createFolder = (req, res) => {
+const createFolder = async (req, res) => {
   const oneDrive = new OneDriveAdapter();
   const folderToCreate = {
     token: req.header('Authorization').replace('Bearer ', ''),
@@ -53,29 +53,30 @@ const createFolder = (req, res) => {
     path: req.body.path,
   };
   try {
-    const response = oneDrive.createFolder(folderToCreate);
-    res.status(201).send(response);
-  } catch (e) {
-    console.log(e.response?.data.error);
-    res.status(500).send(e.response?.data.error);
-  }
-};
-
-const searchFileOrFolder = (req, res) => {
-  const token = req.header('Authorization').replace('Bearer ', '');
-  const oneDrive = new OneDriveAdapter();
-  const name = req.params.fileName;
-  try {
-    const response = oneDrive.search(token, name);
+    const response = await oneDrive.createFolder(folderToCreate);
     console.log(response);
-    res.send(response);
+    res.status(201).send(response);
   } catch (e) {
     console.log(e.response.data.error);
     res.status(500).send(e.response.data.error);
   }
 };
 
-const deleteFileOrFolder = (req, res) => {
+const searchFileOrFolder = async (req, res) => {
+  const token = req.header('Authorization').replace('Bearer ', '');
+  const oneDrive = new OneDriveAdapter();
+  const name = req.params.fileName;
+  try {
+    const response = await oneDrive.search(token, name);
+    console.log(response);
+    res.send(response);
+  } catch (e) {
+    console.log(e.response?.data.error);
+    res.status(500).send(e.response?.data.error);
+  }
+};
+
+const deleteFileOrFolder = async (req, res) => {
   const oneDrive = new OneDriveAdapter();
   const toDelete = {
     token: req.header('Authorization').replace('Bearer ', ''),
@@ -84,9 +85,9 @@ const deleteFileOrFolder = (req, res) => {
   };
 
   try {
-    const response = oneDrive.deleteFileOrFolder(toDelete);
+    const response = await oneDrive.deleteFileOrFolder(toDelete);
     console.log(response);
-    res.send(response);
+    res.send(response.data);
   } catch (e) {
     console.log(e.response.data.error);
     res.status(500).send(e.response.data.error);

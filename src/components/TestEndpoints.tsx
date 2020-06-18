@@ -45,12 +45,9 @@ const deleteFileorFolder = async (history) => {
       headers: { Authorization: `Bearer ${token}` },
       data: {
         path: '',
-      }
+      },
     };
-    const response = await axios.delete(
-      '/drive/test',
-      config
-    );
+    const response = await axios.delete('/drive/test1.docx', config);
     console.log(response);
   } catch (error) {
     console.log('error: ', error);
@@ -60,10 +57,9 @@ const deleteFileorFolder = async (history) => {
 const search = async (history) => {
   try {
     const token = sessionStorage.getItem('token');
-    const response = await axios.get(
-      '/drive/test1',
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
+    const response = await axios.get('/drive/endpoint', {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     console.log(response);
   } catch (error) {
     console.log('error: ', error);

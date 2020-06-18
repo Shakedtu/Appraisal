@@ -18,12 +18,10 @@ class OneDriveAdapter {
   }
 
   async getFile(token, filePath) {
-    return axios.get(
-      `${this.drive_root_url}/children/${filePath}`,
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    );
+    const response = axios.get(`${this.drive_root_url}/children/${filePath}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response.data;
   }
 
   async createFolder({ token, path, name }) {
@@ -33,43 +31,37 @@ class OneDriveAdapter {
       '@microsoft.graph.conflictBehavior': 'rename',
     };
     const paddedPath = path ? `:/${path}:` : '';
-    return axios.post(
-      `${this.drive_root_url}${paddedPath}/children`,
-      folder,
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    );
+    const response = await axios.post(`${this.drive_root_url}${paddedPath}/children`, folder, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    console.log(response);
+    return response.data;
   }
 
   async createFile({ token, path, name, content }) {
-    return axios.put(
+    const response = await axios.put(
       `${this.drive_root_url}:/${path}/${name}:/content`,
       content,
       {
         headers: { Authorization: `Bearer ${token}` },
       }
     );
-  };
+    return response.data;
+  }
 
   async deleteFileOrFolder({ token, path, name }) {
     const paddedPath = path ? `:/${path}` : ':';
-    return axios.delete(
-      `${this.drive_root_url}${paddedPath}/${name}`,
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    );
-  };
+    return axios.delete(`${this.drive_root_url}${paddedPath}/${name}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  }
 
   async search(token, name) {
-    return axios.get(
-      `${this.drive_root_url}/search(q='${name}')`,
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    );
-  };
+    const response = await axios.get(`${this.drive_root_url}/search(q='${name}')`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response.data;
+  }
 }
 
 module.exports = OneDriveAdapter;
