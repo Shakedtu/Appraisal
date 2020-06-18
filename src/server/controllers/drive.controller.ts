@@ -31,14 +31,14 @@ const createFile = (req, res) => {
   const oneDrive = new OneDriveAdapter();
   const fileToCreate = {
     token: req.header('Authorization').replace('Bearer ', ''),
-    name: req.body.name,
+    name: req.params.fileName,
     path: req.body.path,
     content: req.body.content,
   };
   try {
     const response = oneDrive.createFile(fileToCreate);
     console.log(response);
-    res.send(response);
+    res.status(201).send(response);
   } catch (e) {
     console.log(e.response.data.error);
     res.status(500).send(e.response.data.error);
@@ -52,22 +52,19 @@ const createFolder = (req, res) => {
     name: req.body.name,
     path: req.body.path,
   };
-  const response = oneDrive.createFolder(folderToCreate);
-  response
-    .then((res) => {
-      console.log(res);
-      res.send(res);
-    })
-    .catch((e) => {
-      console.log(e.response.data.error);
-      res.status(500).send(e.response.data.error);
-    });
+  try {
+    const response = oneDrive.createFolder(folderToCreate);
+    res.status(201).send(response);
+  } catch (e) {
+    console.log(e.response?.data.error);
+    res.status(500).send(e.response?.data.error);
+  }
 };
 
 const searchFileOrFolder = (req, res) => {
   const token = req.header('Authorization').replace('Bearer ', '');
   const oneDrive = new OneDriveAdapter();
-  const name = req.body.name;
+  const name = req.params.fileName;
   try {
     const response = oneDrive.search(token, name);
     console.log(response);
@@ -79,11 +76,15 @@ const searchFileOrFolder = (req, res) => {
 };
 
 const deleteFileOrFolder = (req, res) => {
-  const token = req.header('Authorization').replace('Bearer ', '');
   const oneDrive = new OneDriveAdapter();
-  const path = req.body.path;
+  const toDelete = {
+    token: req.header('Authorization').replace('Bearer ', ''),
+    name: req.params.fileName,
+    path: req.body.path
+  };
+
   try {
-    const response = oneDrive.search(token, path);
+    const response = oneDrive.deleteFileOrFolder(toDelete);
     console.log(response);
     res.send(response);
   } catch (e) {
@@ -101,4 +102,4 @@ module.exports = {
   deleteFileOrFolder,
 };
 
-export {};
+export { };

@@ -1,4 +1,1 @@
-
-class FirebaseAdapter {
-
-}
+class FirebaseAdapter {}

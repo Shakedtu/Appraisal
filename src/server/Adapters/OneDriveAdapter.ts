@@ -2,7 +2,7 @@ const axios = require('axios');
 
 class OneDriveAdapter {
   private api_url = 'https://graph.microsoft.com/v1.0/me';
-  private drive_url =  `${this.api_url}/drive`;
+  private drive_url = `${this.api_url}/drive`;
   private drive_root_url = `${this.drive_url}/root`;
 
   async getProfile(token) {
@@ -32,9 +32,9 @@ class OneDriveAdapter {
       folder: {},
       '@microsoft.graph.conflictBehavior': 'rename',
     };
-    const paddedPath = path ? `:/${path}:` : ''
+    const paddedPath = path ? `:/${path}:` : '';
     return axios.post(
-        `${this.drive_root_url}${paddedPath}/children`,
+      `${this.drive_root_url}${paddedPath}/children`,
       folder,
       {
         headers: { Authorization: `Bearer ${token}` },
@@ -52,9 +52,10 @@ class OneDriveAdapter {
     );
   };
 
-  async deleteFileOrFolder(token, path) {
+  async deleteFileOrFolder({ token, path, name }) {
+    const paddedPath = path ? `:/${path}` : ':';
     return axios.delete(
-      `${this.drive_root_url}:/${path}`,
+      `${this.drive_root_url}${paddedPath}/${name}`,
       {
         headers: { Authorization: `Bearer ${token}` },
       }
@@ -72,4 +73,4 @@ class OneDriveAdapter {
 }
 
 module.exports = OneDriveAdapter;
-export {};
+export { };
