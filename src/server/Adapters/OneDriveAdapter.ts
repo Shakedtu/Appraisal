@@ -1,21 +1,25 @@
 const axios = require('axios');
 
 class OneDriveAdapter {
+  private api_url = 'https://graph.microsoft.com/v1.0/me';
+  private drive_url =  `${this.api_url}/drive`;
+  private drive_root_url = `${this.drive_url}/root`;
+
   async getProfile(token) {
-    return axios.get('https://graph.microsoft.com/v1.0/me', {
+    return axios.get(this.api_url, {
       headers: { Authorization: `Bearer ${token}` },
     });
   }
 
   async getDrive(token) {
-    return axios.get('https://graph.microsoft.com/v1.0/me/drive', {
+    return axios.get(this.drive_url, {
       headers: { Authorization: `Bearer ${token}` },
     });
   }
 
   async getFile(token, filePath) {
     return axios.get(
-      `https://graph.microsoft.com/v1.0/me/drive/root/children/${filePath}`,
+      `${this.drive_root_url}/children/${filePath}`,
       {
         headers: { Authorization: `Bearer ${token}` },
       }
@@ -28,10 +32,9 @@ class OneDriveAdapter {
       folder: {},
       '@microsoft.graph.conflictBehavior': 'rename',
     };
+    const paddedPath = path ? `:/${path}:` : ''
     return axios.post(
-      path
-        ? `https://graph.microsoft.com/v1.0/me/drive/root:/${path}:/children`
-        : 'https://graph.microsoft.com/v1.0/me/drive/root/children',
+        `${this.drive_root_url}${paddedPath}/children`,
       folder,
       {
         headers: { Authorization: `Bearer ${token}` },
@@ -41,32 +44,32 @@ class OneDriveAdapter {
 
   async createFile({ token, path, name, content }) {
     return axios.put(
-      `https://graph.microsoft.com/v1.0/me/drive/root:/${path}/${name}:/content`,
+      `${this.drive_root_url}:/${path}/${name}:/content`,
       content,
       {
         headers: { Authorization: `Bearer ${token}` },
       }
     );
-  }
+  };
 
   async deleteFileOrFolder(token, path) {
     return axios.delete(
-      `https://graph.microsoft.com/v1.0/me/drive/root:/${path}`,
+      `${this.drive_root_url}:/${path}`,
       {
         headers: { Authorization: `Bearer ${token}` },
       }
     );
-  }
+  };
 
   async search(token, name) {
     return axios.get(
-      `https://graph.microsoft.com/v1.0/me/drive/root/search(q='${name}')`,
+      `${this.drive_root_url}/search(q='${name}')`,
       {
         headers: { Authorization: `Bearer ${token}` },
       }
     );
-  }
+  };
 }
 
 module.exports = OneDriveAdapter;
-export { };
+export {};

@@ -101,4 +101,4 @@ module.exports = {
   deleteFileOrFolder,
 };
 
-export { };
+export {};
