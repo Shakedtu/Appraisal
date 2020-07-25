@@ -31,9 +31,13 @@ class OneDriveAdapter {
       '@microsoft.graph.conflictBehavior': 'rename',
     };
     const paddedPath = path ? `:/${path}:` : '';
-    const response = await axios.post(`${this.drive_root_url}${paddedPath}/children`, folder, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const response = await axios.post(
+      `${this.drive_root_url}${paddedPath}/children`,
+      folder,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
     console.log(response);
     return response.data;
   }
@@ -57,12 +61,15 @@ class OneDriveAdapter {
   }
 
   async search(token, name) {
-    const response = await axios.get(`${this.drive_root_url}/search(q='${name}')`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const response = await axios.get(
+      `${this.drive_root_url}/search(q='${name}')`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
     return response.data;
   }
 }
 
 module.exports = OneDriveAdapter;
-export { };
+export {};

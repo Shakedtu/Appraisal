@@ -81,7 +81,7 @@ const deleteFileOrFolder = async (req, res) => {
   const toDelete = {
     token: req.header('Authorization').replace('Bearer ', ''),
     name: req.params.fileName,
-    path: req.body.path
+    path: req.body.path,
   };
 
   try {
@@ -103,4 +103,4 @@ module.exports = {
   deleteFileOrFolder,
 };
 
-export { };
+export {};
