@@ -1,7 +1,7 @@
 import { LazyExoticComponent } from 'react';
 
 export interface AppPage {
-  id: string;
+  key: string;
   path: PagesRoutes;
   component: LazyExoticComponent<any>;
 }

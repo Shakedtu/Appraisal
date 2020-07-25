@@ -13,9 +13,7 @@ const AppRouter: React.FunctionComponent<AppRouterProps> = ({ appPages }) => {
         {appPages.map((appPage) => (
           <Route
             exact
-            key={appPage.id}
-            path={appPage.path}
-            component={appPage.component}
+            {...appPage}
           />
         ))}
       </Switch>

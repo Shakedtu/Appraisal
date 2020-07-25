@@ -12,28 +12,28 @@ const App = () => {
 
   const Pages: AppPage[] = [
     {
-      id: 'home',
+      key: 'home',
       path: PagesRoutes.HOME,
       component: lazy(() =>
         import(/* webpackPreload: true */ './components/Login')
       ),
     },
     {
-      id: 'caseTable',
+      key: 'caseTable',
       path: PagesRoutes.CASE_TABLE,
       component: lazy(() =>
         import(/* webpackPrefetch: true */ './components/CaseTable/CaseTable')
       ),
     },
     {
-      id: 'case',
+      key: 'case',
       path: PagesRoutes.CASE,
       component: lazy(() =>
         import(/* webpackPrefetch: true */ './components/Case/Case')
       ),
     },
     {
-      id: 'test',
+      key: 'test',
       path: PagesRoutes.TEST_ENDPOINTS,
       component: lazy(() =>
         import(/* webpackPreload: true */ './components/TestEndpoints')
@@ -52,8 +52,8 @@ const App = () => {
         <BrowserRouter>
           <Suspense fallback={<Spin />}>
             <Switch>
-              {Pages.map(({ id, path, component }: AppPage) => (
-                <Route exact key={id} path={path} component={component} />
+              {Pages.map((page: AppPage) => (
+                <Route exact {...page} />
               ))}
             </Switch>
           </Suspense>
