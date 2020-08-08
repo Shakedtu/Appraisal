@@ -1,10 +1,10 @@
-import * as firebase from 'firebase';
-import * as config from '../../firebaseConfig.json';
+import firebase from 'firebase';
+import config from '../../firebaseConfig.json';
 
+firebase.initializeApp(config);
 export class FirebaseAdapter {
   private fireStore;
   constructor() {
-    firebase.initializeApp(config);
     this.fireStore = firebase.firestore();
   }
 
