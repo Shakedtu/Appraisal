@@ -11,10 +11,7 @@ const AppRouter: React.FunctionComponent<AppRouterProps> = ({ appPages }) => {
     <BrowserRouter>
       <Switch>
         {appPages.map((appPage) => (
-          <Route
-            exact
-            {...appPage}
-          />
+          <Route exact {...appPage} />
         ))}
       </Switch>
     </BrowserRouter>

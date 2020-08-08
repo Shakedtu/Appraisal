@@ -1,5 +1,5 @@
 import React from 'react';
-import * as firebase from 'firebase';
+import * as firebase from 'firebase/app';
 import axios from 'axios';
 import { Button } from 'antd';
 import { WindowsFilled } from '@ant-design/icons';

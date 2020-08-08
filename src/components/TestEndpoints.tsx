@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Button } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
+import { FirebaseAdapter } from '../server/Adapters/FirebaseAdapter';
 
 const createFolder = async (history) => {
   try {
@@ -66,6 +67,11 @@ const search = async (history) => {
   }
 };
 
+const addUser = async () => {
+  const db = new FirebaseAdapter();
+  await db.addUser();
+};
+
 const Endpoint = () => {
   const { t } = useTranslation();
   const history = useHistory();
@@ -82,6 +88,9 @@ const Endpoint = () => {
       </Button>
       <Button className="button" onClick={() => search(history)}>
         {t('server_test.search')}
+      </Button>
+      <Button className="button" onClick={() => addUser()}>
+        add user
       </Button>
     </div>
   );

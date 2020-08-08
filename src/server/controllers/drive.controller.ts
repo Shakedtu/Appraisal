@@ -1,10 +1,10 @@
-const OneDriveAdapter = require('../Adapters/OneDriveAdapter.ts');
+import { OneDriveAdapter } from '../Adapters/OneDriveAdapter';
 
 const getDrive = async (req, res) => {
   const oneDrive = new OneDriveAdapter();
   const token = req.header('Authorization').replace('Bearer ', '');
   try {
-    const response = await oneDrive.getFile(token);
+    const response = await oneDrive.getFile(token, '/home');
     console.log(response);
     res.send(response);
   } catch (e) {

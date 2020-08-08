@@ -1,6 +1,7 @@
 const driveCtrl = require('../controllers/drive.controller.ts');
-const driveRouter = require('express').Router();
+import { Router } from 'express';
 
+const driveRouter = Router();
 driveRouter
   .route('/drive')
   .get(driveCtrl.getDrive)
@@ -12,5 +13,4 @@ driveRouter
   .put(driveCtrl.createFile)
   .delete(driveCtrl.deleteFileOrFolder);
 
-module.exports = driveRouter;
-export {};
+export { driveRouter };

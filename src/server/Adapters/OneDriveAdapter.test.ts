@@ -1,5 +1,5 @@
 import axios from 'axios';
-const OneDriveAdapter = require('./OneDriveAdapter.ts');
+import { OneDriveAdapter } from './OneDriveAdapter';
 
 describe('OneDrive Adapter', () => {
   it('should call userProfile endpoint', async () => {

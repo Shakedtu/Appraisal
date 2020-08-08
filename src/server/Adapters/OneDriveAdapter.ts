@@ -1,6 +1,6 @@
-const axios = require('axios');
+import axios from 'axios';
 
-class OneDriveAdapter {
+export class OneDriveAdapter {
   private api_url = 'https://graph.microsoft.com/v1.0/me';
   private drive_url = `${this.api_url}/drive`;
   private drive_root_url = `${this.drive_url}/root`;
@@ -18,9 +18,12 @@ class OneDriveAdapter {
   }
 
   async getFile(token, filePath) {
-    const response = axios.get(`${this.drive_root_url}/children/${filePath}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const response = await axios.get(
+      `${this.drive_root_url}/children/${filePath}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
     return response.data;
   }
 
@@ -70,6 +73,3 @@ class OneDriveAdapter {
     return response.data;
   }
 }
-
-module.exports = OneDriveAdapter;
-export {};

@@ -1,4 +1,4 @@
-const OneDriveAdapter = require('../Adapters/OneDriveAdapter.ts');
+import { OneDriveAdapter } from '../Adapters/OneDriveAdapter';
 
 const authenticate = async (req, res) => {
   const token = req.header('Authorization').replace('Bearer ', '');
@@ -10,6 +10,4 @@ const authenticate = async (req, res) => {
   }
 };
 
-module.exports = authenticate;
-
-export {};
+export { authenticate as default };

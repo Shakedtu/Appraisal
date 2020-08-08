@@ -1,7 +1,7 @@
-const auth = require('../controllers/auth.controller.ts');
-const authRouter = require('express').Router();
+import auth from '../controllers/auth.controller';
+import { Router } from 'express';
 
+const authRouter = Router();
 authRouter.route('/auth').post(auth);
 
-module.exports = authRouter;
-export {};
+export { authRouter };
