@@ -1,4 +1,4 @@
-import { OneDriveAdapter } from '../Adapters/OneDriveAdapter';
+import { OneDriveAdapter } from '../../adapters/OneDriveAdapter';
 
 const authenticate = async (req, res) => {
   const token = req.header('Authorization').replace('Bearer ', '');

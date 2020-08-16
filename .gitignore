@@ -26,4 +26,3 @@ yarn-error.log*
 /src/server/.env
 /src/server/serviceAccount.json
 /src/.env
-# /src/firebaseConfig.json

@@ -1,4 +1,4 @@
-import { OneDriveAdapter } from '../Adapters/OneDriveAdapter';
+import { OneDriveAdapter } from '../../adapters/OneDriveAdapter';
 
 const getDrive = async (req, res) => {
   const oneDrive = new OneDriveAdapter();

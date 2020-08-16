@@ -5,24 +5,23 @@ export class OneDriveAdapter {
   private drive_url = `${this.api_url}/drive`;
   private drive_root_url = `${this.drive_url}/root`;
 
-  async getProfile(token) {
-    return axios.get(this.api_url, {
+  private config(token) {
+    return {
       headers: { Authorization: `Bearer ${token}` },
-    });
+    };
+  }
+  async getProfile(token) {
+    return axios.get(this.api_url, this.config(token));
   }
 
   async getDrive(token) {
-    return axios.get(this.drive_url, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    return axios.get(this.drive_url, this.config(token));
   }
 
   async getFile(token, filePath) {
     const response = await axios.get(
       `${this.drive_root_url}/children/${filePath}`,
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      }
+      this.config(token)
     );
     return response.data;
   }
@@ -37,11 +36,8 @@ export class OneDriveAdapter {
     const response = await axios.post(
       `${this.drive_root_url}${paddedPath}/children`,
       folder,
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      }
+      this.config(token)
     );
-    console.log(response);
     return response.data;
   }
 
@@ -49,26 +45,23 @@ export class OneDriveAdapter {
     const response = await axios.put(
       `${this.drive_root_url}:/${path}/${name}:/content`,
       content,
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      }
+      this.config(token)
     );
     return response.data;
   }
 
   async deleteFileOrFolder({ token, path, name }) {
     const paddedPath = path ? `:/${path}` : ':';
-    return axios.delete(`${this.drive_root_url}${paddedPath}/${name}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    return axios.delete(
+      `${this.drive_root_url}${paddedPath}/${name}`,
+      this.config(token)
+    );
   }
 
   async search(token, name) {
     const response = await axios.get(
       `${this.drive_root_url}/search(q='${name}')`,
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      }
+      this.config(token)
     );
     return response.data;
   }

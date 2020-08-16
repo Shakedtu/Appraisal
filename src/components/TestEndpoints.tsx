@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Button } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
-import { FirebaseAdapter } from '../server/Adapters/FirebaseAdapter';
+import {firebaseAdapter} from "../adapters/firebaseAdapter";
 
 const createFolder = async (history) => {
   try {
@@ -68,8 +68,10 @@ const search = async (history) => {
 };
 
 const addUser = async () => {
-  const db = new FirebaseAdapter();
-  await db.addUser();
+    console.log(await firebaseAdapter.addUser({
+        name: 'Shake',
+        age: 120
+    }));
 };
 
 const Endpoint = () => {

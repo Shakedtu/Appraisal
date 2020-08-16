@@ -1,12 +1,3 @@
-export enum EventType {}
-export enum CaseStatus {
-  NEW,
-  OPEN,
-  CLOSE,
-}
-export enum ContactType {}
-export enum CaseType {}
-export enum PolicyType {}
 export enum PaymentType {
   CONSULTING,
   COURT,
@@ -14,6 +5,15 @@ export enum PaymentType {
   FEES,
   TRAVEL_EXPENSES,
 }
+export enum CaseStatus {
+  NEW,
+  OPEN,
+  CLOSE,
+}
+export enum EventType {}
+export enum ContactType {}
+export enum CaseType {}
+export enum PolicyType {}
 export interface Case {
   id: string;
   type: CaseType;
