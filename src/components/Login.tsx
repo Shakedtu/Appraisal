@@ -4,11 +4,11 @@ import { WindowsFilled } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import MicrosoftProvider from '../Providers/MicrosoftProvider';
-import {firebaseAdapter} from "../adapters/firebaseAdapter";
+import { firebaseAdapter } from '../adapters/firebaseAdapter';
 
 const startLogin = async (history) => {
   try {
-    await firebaseAdapter.authenticate(MicrosoftProvider)
+    await firebaseAdapter.authenticate(MicrosoftProvider);
     history.push('/test');
   } catch (error) {
     console.log('error: ', error);

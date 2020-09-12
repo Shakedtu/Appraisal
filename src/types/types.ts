@@ -8,11 +8,22 @@ export enum PaymentType {
 export enum CaseStatus {
   NEW,
   OPEN,
+  WAITING_FOR_FIRST_IMPRESSION,
+  WAITING_FOR_REPORT,
+  WAITING_FOR_PAYMENT,
   CLOSE,
 }
 export enum EventType {}
 export enum ContactType {}
-export enum CaseType {}
+export enum CaseType {
+  WATER,
+  FIRE,
+  BURGLARY,
+  WIND,
+  FLOOD,
+  EXEDENT,
+  ALL_RISKS,
+}
 export enum PolicyType {}
 export interface Case {
   id: string;

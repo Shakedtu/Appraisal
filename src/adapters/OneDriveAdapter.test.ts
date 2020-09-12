@@ -1,5 +1,5 @@
-import axios from "axios";
-import {OneDriveAdapter} from "./OneDriveAdapter";
+import axios from 'axios';
+import { OneDriveAdapter } from './OneDriveAdapter';
 
 describe('OneDrive Adapter', () => {
   it('should call userProfile endpoint', async () => {

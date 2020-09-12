@@ -1,3 +1,5 @@
+import { Contact } from '../types/types';
+
 export const firebase = window.firebase;
 
 export interface firebaseAdapter {
@@ -16,10 +18,10 @@ export const firebaseAdapter = {
   },
   addUser: async (userData) => {
     const docRef = await firebase.firestore().collection('users').add(userData);
-    return docRef.id
+    return docRef.id;
   },
   helloWorld: async () => {
     const hello = firebase.functions().httpsCallable('helloWorld');
     return hello();
-  }
+  },
 };

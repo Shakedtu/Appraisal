@@ -1,7 +1,7 @@
-import {firebaseAdapter} from "./firebaseAdapter";
+import { firebaseAdapter } from './firebaseAdapter';
 import MicrosoftProvider from '../Providers/MicrosoftProvider';
 describe('firebase adapter', () => {
-    it('should authenticate', async () => {
-        expect(true).toBe(true);
-    })
-})
+  it('should authenticate', async () => {
+    expect(true).toBe(true);
+  });
+});
