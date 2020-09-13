@@ -4,6 +4,15 @@ import { Button } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import { firebaseAdapter } from '../adapters/firebaseAdapter';
+import {
+  Client,
+  ICase,
+  Contact,
+  ContactType,
+  CaseType,
+  Address,
+  CaseStatus,
+} from '../types/types';
 
 const createFolder = async (history) => {
   try {
@@ -67,13 +76,54 @@ const search = async (history) => {
   }
 };
 
-const addUser = async () => {
-  console.log(
-    await firebaseAdapter.addUser({
-      name: 'Shake',
-      age: 120,
-    })
-  );
+const addClient = async () => {
+  const client: Client = {
+    name: 'example',
+  };
+  console.log(await firebaseAdapter.addClient(client));
+};
+
+const addContact = async () => {
+  const contact: Contact = {
+    type: ContactType.INSURANCE_COMPANY,
+    name: 'example',
+    phone: '00',
+  };
+  console.log(await firebaseAdapter.addContact(contact));
+};
+
+const addCase = async () => {
+  const contact: Contact = {
+    type: ContactType.INSURANCE_COMPANY,
+    name: 'example',
+    phone: '00',
+  };
+
+  const client: Client = {
+    name: 'migdal',
+  };
+
+  const address: Address = {
+    street: 'example',
+    houseNumber: '6',
+    city: 'Tel Aviv',
+  };
+
+  const newCase: ICase = {
+    type: CaseType.WATER,
+    client: client,
+    address: address,
+    createdAt: 0,
+    status: CaseStatus.NEW,
+    comments: '',
+    contacts: [contact],
+  };
+
+  console.log(await firebaseAdapter.addCase(newCase));
+};
+
+const deleteClient = async () => {
+  console.log(await firebaseAdapter.deleteClient('1'));
 };
 
 const Endpoint = () => {
@@ -93,8 +143,17 @@ const Endpoint = () => {
       <Button className="button" onClick={() => search(history)}>
         {t('server_test.search')}
       </Button>
-      <Button className="button" onClick={() => addUser()}>
-        add user
+      <Button className="button" onClick={() => addClient()}>
+        {t('server_test.add-client')}
+      </Button>
+      <Button className="button" onClick={() => addContact()}>
+        {t('server_test.add-contact')}
+      </Button>
+      <Button className="button" onClick={() => addCase()}>
+        {t('server_test.add-case')}
+      </Button>
+      <Button className="button" onClick={() => deleteClient()}>
+        deleteClient
       </Button>
     </div>
   );

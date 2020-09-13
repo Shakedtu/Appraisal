@@ -13,8 +13,14 @@ export enum CaseStatus {
   WAITING_FOR_PAYMENT,
   CLOSE,
 }
-export enum EventType {}
-export enum ContactType {}
+export enum EventType { }
+
+export enum ContactType {
+  INSURANCE_COMPANY,
+  INSURANCE_AGENT,
+  PRIVATE_CUSTOMER,
+}
+
 export enum CaseType {
   WATER,
   FIRE,
@@ -24,20 +30,20 @@ export enum CaseType {
   EXEDENT,
   ALL_RISKS,
 }
-export enum PolicyType {}
-export interface Case {
-  id: string;
+export enum PolicyType { }
+export interface ICase {
+  id?: string;
   type: CaseType;
-  attachments: Attachment[];
+  attachments?: Attachment[];
   client: Client;
-  policyType: PolicyType;
-  address: Address;
+  policyType?: PolicyType;
+  address?: Address;
   createdAt: number;
   status: CaseStatus;
   comments: string;
   contacts: Contact[];
-  events: Event[];
-  payments: Payment[];
+  events?: Event[];
+  payments?: Payment[];
 }
 export interface Payment {
   type: PaymentType;
@@ -61,5 +67,11 @@ export interface Contact {
   email?: string;
   fax?: string;
 }
-export interface Address {}
-export interface Client {}
+export interface Address {
+  street: string;
+  houseNumber: string;
+  city: string;
+}
+export interface Client {
+  name: string;
+}

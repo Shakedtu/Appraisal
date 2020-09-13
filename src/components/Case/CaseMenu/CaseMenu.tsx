@@ -24,11 +24,13 @@ export enum CaseMenuTabs {
 interface CaseMenuProps {
   selectedTab: CaseMenuTabs;
   onSelect;
+  caseDoc;
 }
 
 const CaseMenu: FunctionComponent<CaseMenuProps> = ({
   selectedTab,
   onSelect,
+  caseDoc
 }) => {
   const { t } = useTranslation();
   const history = useHistory();
@@ -68,7 +70,7 @@ const CaseMenu: FunctionComponent<CaseMenuProps> = ({
       <PageHeader
         className="site-page-header"
         onBack={onBack}
-        title={t('case.header.title', { name: 'ישראלי אלי' })}
+        title={t('case.header.title', { name: caseDoc.client.name })}
       />
       <Menu mode="horizontal" selectedKeys={[selectedTab]} onSelect={onSelect}>
         {MenuTabs.map((tab) => MenuTab(tab))}
