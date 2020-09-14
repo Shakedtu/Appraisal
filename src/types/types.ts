@@ -13,7 +13,7 @@ export enum CaseStatus {
   WAITING_FOR_PAYMENT,
   CLOSE,
 }
-export enum EventType { }
+export enum EventType {}
 
 export enum ContactType {
   INSURANCE_COMPANY,
@@ -30,7 +30,7 @@ export enum CaseType {
   EXEDENT,
   ALL_RISKS,
 }
-export enum PolicyType { }
+export enum PolicyType {}
 export interface ICase {
   id?: string;
   type: CaseType;

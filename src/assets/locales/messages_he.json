@@ -1,6 +1,7 @@
 {
   "header.title": "כמון סיקור",
   "button": "כפתור",
+  "dashboard.item.case-table": "רשימת תיקים",
   "file-table.header.column.id": "מספר תיק",
   "file-table.header.column.caseType": "סוג נזק",
   "file-table.header.column.status": "מצב תיק",

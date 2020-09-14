@@ -15,6 +15,13 @@ const App = () => {
       key: 'home',
       path: PagesRoutes.HOME,
       component: lazy(() =>
+        import(/* webpackPreload: true */ './components/Dashboard')
+      ),
+    },
+    {
+      key: 'login',
+      path: PagesRoutes.LOGIN,
+      component: lazy(() =>
         import(/* webpackPreload: true */ './components/Login')
       ),
     },
@@ -38,7 +45,7 @@ const App = () => {
       component: lazy(() =>
         import(/* webpackPreload: true */ './components/TestEndpoints')
       ),
-    },
+    }
   ];
 
   return (

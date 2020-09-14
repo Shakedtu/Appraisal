@@ -30,7 +30,7 @@ interface CaseMenuProps {
 const CaseMenu: FunctionComponent<CaseMenuProps> = ({
   selectedTab,
   onSelect,
-  caseDoc
+  caseDoc,
 }) => {
   const { t } = useTranslation();
   const history = useHistory();

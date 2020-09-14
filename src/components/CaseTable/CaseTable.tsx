@@ -56,7 +56,7 @@ const CaseTable: React.FunctionComponent = () => {
   ];
   useEffect(() => {
     const getData = async () => {
-      const casesData: ICase[] = await firebaseAdapter.getCases(casesRef);
+      const casesData: ICase[] = await firebaseAdapter.getCases();
       setData(casesData);
     };
 
