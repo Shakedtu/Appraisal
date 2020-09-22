@@ -2,9 +2,7 @@ import { ICase } from '../types/types';
 
 declare var window;
 export const firebase = window.firebase;
-// const casesRef = firebase.firestore().collection('cases');
-// const clientsRef = firebase.firestore().collection('clients');
-// const contactsRef = firebase.firestore().collection('contacts');
+
 export interface firebaseAdapter {
   authenticate;
   addClient;
@@ -13,6 +11,7 @@ export interface firebaseAdapter {
   addCase;
   getCase;
   getCases;
+  getCasesByInsurer;
   deleteClient;
   deleteContact;
   deleteCase;
@@ -60,18 +59,33 @@ export const firebaseAdapter = {
         casesData.forEach((doc) => {
           let newCase: ICase = {
             id: doc.id,
-            type: doc.data().type,
-            client: doc.data().client,
-            address: doc.data().address,
-            createdAt: doc.data().createdAt,
-            status: doc.data().status,
-            comments: doc.data().comments,
-            contacts: doc.data().contacts,
+            // type: doc.data().type,
+            // client: doc.data().client,
+            // address: doc.data().address,
+            // createdAt: doc.data().createdAt,
+            // status: doc.data().status,
+            // comments: doc.data().comments,
+            // contacts: doc.data().contacts,
+            ...doc.data(),
           };
           newState.push(newCase);
         });
         return newState;
       });
+  },
+  getCasesByInsurer: async (insurer: string) => {
+    const casesRef = firebaseAdapter.getCollection('cases');
+    const casesArray: ICase[] = [];
+    const snapshot = await casesRef.where('client/name', '==', insurer).get();
+    snapshot.forEach((doc) => {
+      const caseData: ICase = {
+        id: doc.id,
+        ...doc.data(),
+      };
+      casesArray.push(caseData);
+      console.log(doc.id, '=>', doc.data());
+    });
+    return casesArray;
   },
   deleteClient: async (id: string) => {
     const res = await firebaseAdapter.getCollection('clients').doc(id).delete();

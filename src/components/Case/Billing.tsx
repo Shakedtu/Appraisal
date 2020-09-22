@@ -4,9 +4,7 @@ import { Card } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { ICase } from '../../types/types';
 
-const Billing: FunctionComponent<{ data: ICase }> = ({
-  data
-}) => {
+const Billing: FunctionComponent<{ data: ICase }> = ({ data }) => {
   const { payments } = data;
   const { t } = useTranslation();
   return (
@@ -17,7 +15,6 @@ const Billing: FunctionComponent<{ data: ICase }> = ({
     </>
   );
   // TODO:: loop over payments array
-
 };
 
 export default Billing;

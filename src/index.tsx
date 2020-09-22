@@ -8,13 +8,20 @@ import './i18n';
 import heIL from 'antd/es/locale/he_IL';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <ConfigProvider locale={heIL} direction="rtl">
-      <App />
-    </ConfigProvider>
-  </React.StrictMode>,
+  <ConfigProvider locale={heIL} direction="rtl">
+    <App />
+  </ConfigProvider>,
   document.getElementById('root')
 );
+
+// ReactDOM.render(
+//   <React.StrictMode>
+//     <ConfigProvider locale={heIL} direction="rtl">
+//       <App />
+//     </ConfigProvider>
+//   </React.StrictMode>,
+//   document.getElementById('root')
+// );
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

@@ -44,7 +44,8 @@
     "request-promise": "^4.2.5",
     "source-map-explorer": "^2.4.2",
     "ts-node": "^8.10.2",
-    "typescript": "^3.9.7"
+    "typescript": "^3.9.7",
+    "uid": "^1.0.0"
   },
   "scripts": {
     "analyze": "source-map-explorer 'build/static/js/*.js'",

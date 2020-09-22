@@ -4,6 +4,7 @@ import { Layout, Typography, Spin } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { AppPage, PagesRoutes } from './components/AppRouter/AppRouterConst';
+import uid from 'uid';
 
 const App = () => {
   const { t } = useTranslation();
@@ -45,7 +46,7 @@ const App = () => {
       component: lazy(() =>
         import(/* webpackPreload: true */ './components/TestEndpoints')
       ),
-    }
+    },
   ];
 
   return (
@@ -60,7 +61,7 @@ const App = () => {
           <Suspense fallback={<Spin />}>
             <Switch>
               {Pages.map((page: AppPage) => (
-                <Route exact {...page} />
+                <Route exact {...page} key={uid()} />
               ))}
             </Switch>
           </Suspense>

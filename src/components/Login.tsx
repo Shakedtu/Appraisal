@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Button } from 'antd';
 import { WindowsFilled } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
@@ -9,7 +9,7 @@ import { firebaseAdapter } from '../adapters/firebaseAdapter';
 const startLogin = async (history) => {
   try {
     await firebaseAdapter.authenticate(MicrosoftProvider);
-    history.push('/dashboard');
+    history.push('/');
   } catch (error) {
     console.log('error: ', error);
   }

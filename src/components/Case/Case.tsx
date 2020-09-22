@@ -23,13 +23,11 @@ const Case: FunctionComponent<{ match: { params: { id } } }> = ({
     createdAt: 0,
     status: CaseStatus.NEW,
     comments: '',
-    contacts: []
+    contacts: [],
   });
 
   const Tabs = {
-    [CaseMenuTabs.CONTACT_INFO]: (
-      <ContactInfo data={caseData} />
-    ),
+    [CaseMenuTabs.CONTACT_INFO]: <ContactInfo data={caseData} />,
     [CaseMenuTabs.MORE_INFO]: <MoreInfo />,
     [CaseMenuTabs.BILL_INFO]: <Billing data={caseData} />,
     // [CaseMenuTabs.DOCUMENTS]: <ContactInfo tab={CaseMenuTabs.DOCUMENTS} />,

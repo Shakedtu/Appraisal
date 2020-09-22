@@ -6,39 +6,34 @@ import CaseTable from '../components/CaseTable/CaseTable';
 import Endpoint from '../components/TestEndpoints';
 
 const MenuItemsContent = {
-  "1": <CaseTable />,
-  "2": <Endpoint />
+  'cases-list': <CaseTable />,
+  tests: <Endpoint />,
 };
-
 
 const Dashboard = () => {
   const { t } = useTranslation();
   const history = useHistory();
   const { Sider, Content } = Layout;
-  const [currentKey, setCurrentKey] = useState("1");
+  const [currentKey, setCurrentKey] = useState('cases-list');
   const onSelectedItem = ({ key }) => setCurrentKey(key);
 
-  if (!sessionStorage.getItem('token'))
-    history.push('/login');
+  if (!sessionStorage.getItem('token')) history.push('/login');
   return (
     <Layout>
       <Sider>
         <Menu
           theme="dark"
-          defaultSelectedKeys={['1']}
+          defaultSelectedKeys={['cases-list']}
           mode="inline"
-          onSelect={onSelectedItem}>
-          <Menu.Item key="1">
+          onSelect={onSelectedItem}
+        >
+          <Menu.Item key='cases-list'>
             {t('dashboard.item.case-table')}
           </Menu.Item>
-          <Menu.Item key="2">
-            tests
-          </Menu.Item>
+          <Menu.Item key="tests">tests</Menu.Item>
         </Menu>
       </Sider>
-      <Content>
-        {MenuItemsContent[currentKey]}
-      </Content>
+      <Content>{MenuItemsContent[currentKey]}</Content>
     </Layout>
   );
 };

@@ -40,7 +40,7 @@ export interface ICase {
   address?: Address;
   createdAt: number;
   status: CaseStatus;
-  comments: string;
+  comments?: string;
   contacts: Contact[];
   events?: Event[];
   payments?: Payment[];

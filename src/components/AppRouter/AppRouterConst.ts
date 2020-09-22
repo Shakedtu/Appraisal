@@ -12,5 +12,5 @@ export enum PagesRoutes {
   CASE = '/case/:id',
   TEST_ENDPOINTS = '/test',
   DASHBOARD = '/dashboard',
-  LOGIN = '/login'
+  LOGIN = '/login',
 }

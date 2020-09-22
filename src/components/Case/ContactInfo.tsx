@@ -4,9 +4,7 @@ import { Card } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { ICase } from '../../types/types';
 
-const ContactInfo: FunctionComponent<{ data: ICase }> = ({
-  data
-}) => {
+const ContactInfo: FunctionComponent<{ data: ICase }> = ({ data }) => {
   console.log('data ', data);
   const { contacts } = data;
   const { t } = useTranslation();
