@@ -36,13 +36,10 @@ const Case: FunctionComponent<{ match: { params: { id } } }> = ({
   const onSelectTab = ({ key }) => setSelectedTab(key);
 
   useEffect(() => {
-    const getCaseData = async () => {
-      const result = await firebaseAdapter.getCase(id);
-      setCaseData(result);
-    };
-
-    getCaseData();
-  }, [caseData, id]);
+    firebaseAdapter.getCase(id).then((result) => {
+      setCaseData(result as ICase)
+    })
+  }, [id]);
 
   return (
     <div>
