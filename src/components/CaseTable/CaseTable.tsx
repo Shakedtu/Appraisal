@@ -72,7 +72,7 @@ const CaseTable: React.FunctionComponent = () => {
   ];
 
   useEffect(() => {
-    firebaseAdapter.getCases().then(casesDate => setData(casesDate))
+    firebaseAdapter.getCases().then((casesDate) => setData(casesDate));
   }, []);
 
   const insurerFilter = async ({ key }) => {

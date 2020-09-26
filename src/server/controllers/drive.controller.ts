@@ -4,7 +4,7 @@ const getDrive = async (req, res) => {
   const oneDrive = new OneDriveAdapter();
   const token = req.header('Authorization').replace('Bearer ', '');
   try {
-    const response = await oneDrive.getFile(token, '/home');
+    const response = await oneDrive.getFile('/home');
     console.log(response);
     res.send(response);
   } catch (e) {
@@ -18,7 +18,7 @@ const getFile = async (req, res) => {
   const token = req.header('Authorization').replace('Bearer ', '');
   const path = req.body.path;
   try {
-    const response = await oneDrive.getFile(token, path);
+    const response = await oneDrive.getFile(path);
     console.log(response);
     res.send(response);
   } catch (e) {
@@ -63,11 +63,10 @@ const createFolder = async (req, res) => {
 };
 
 const searchFileOrFolder = async (req, res) => {
-  const token = req.header('Authorization').replace('Bearer ', '');
   const oneDrive = new OneDriveAdapter();
   const name = req.params.fileName;
   try {
-    const response = await oneDrive.search(token, name);
+    const response = await oneDrive.search(name);
     console.log(response);
     res.send(response);
   } catch (e) {

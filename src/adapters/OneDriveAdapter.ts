@@ -4,29 +4,30 @@ export class OneDriveAdapter {
   private api_url = 'https://graph.microsoft.com/v1.0/me';
   private drive_url = `${this.api_url}/drive`;
   private drive_root_url = `${this.drive_url}/root`;
+  private token = sessionStorage.getItem('token');
 
-  private config(token) {
+  private get config() {
     return {
-      headers: { Authorization: `Bearer ${token}` },
+      headers: { Authorization: `Bearer ${this.token}` },
     };
   }
-  async getProfile(token) {
-    return axios.get(this.api_url, this.config(token));
+  async getProfile() {
+    return axios.get(this.api_url, this.config);
   }
 
-  async getDrive(token) {
-    return axios.get(this.drive_url, this.config(token));
+  async getDrive() {
+    return axios.get(this.drive_url, this.config);
   }
 
-  async getFile(token, filePath) {
+  async getFile(filePath) {
     const response = await axios.get(
       `${this.drive_root_url}/children/${filePath}`,
-      this.config(token)
+      this.config
     );
     return response.data;
   }
 
-  async createFolder({ token, path, name }) {
+  async createFolder({ path, name }) {
     const folder = {
       name,
       folder: {},
@@ -36,32 +37,32 @@ export class OneDriveAdapter {
     const response = await axios.post(
       `${this.drive_root_url}${paddedPath}/children`,
       folder,
-      this.config(token)
+      this.config
     );
     return response.data;
   }
 
-  async createFile({ token, path, name, content }) {
+  async createFile({ path, name, content }) {
     const response = await axios.put(
       `${this.drive_root_url}:/${path}/${name}:/content`,
       content,
-      this.config(token)
+      this.config
     );
     return response.data;
   }
 
-  async deleteFileOrFolder({ token, path, name }) {
+  async deleteFileOrFolder({ path, name }) {
     const paddedPath = path ? `:/${path}` : ':';
     return axios.delete(
       `${this.drive_root_url}${paddedPath}/${name}`,
-      this.config(token)
+      this.config
     );
   }
 
-  async search(token, name) {
+  async search(name) {
     const response = await axios.get(
       `${this.drive_root_url}/search(q='${name}')`,
-      this.config(token)
+      this.config
     );
     return response.data;
   }

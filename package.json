@@ -20,9 +20,6 @@
     "antd": "^4.5.3",
     "antd-dayjs-webpack-plugin": "^1.0.0",
     "axios": "^0.19.2",
-    "connect-logger": "0.0.1",
-    "cookie-parser": "^1.4.5",
-    "cookie-session": "^1.4.0",
     "crypto": "^1.0.1",
     "docx": "^5.3.0",
     "dotenv": "^8.2.0",
@@ -56,10 +53,7 @@
     "start": "npm run prettier && craco start",
     "build": "craco build",
     "test": "craco test",
-    "deploy": "npm run build && firebase deploy",
-    "server": "ts-node --project src/server/tsconfig.json src/server/index.ts",
-    "dev": "run-p server:dev start",
-    "server:dev": "nodemon src/server/index.ts"
+    "deploy": "npm run build && firebase deploy"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -77,10 +71,8 @@
     ]
   },
   "devDependencies": {
-    "nodemon": "^2.0.4",
     "prettier": "2.0.5",
     "webpack-bundle-analyzer": "^3.8.0"
   },
-  "proxy": "http://localhost:5000",
   "secure": false
 }

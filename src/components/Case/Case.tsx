@@ -37,8 +37,8 @@ const Case: FunctionComponent<{ match: { params: { id } } }> = ({
 
   useEffect(() => {
     firebaseAdapter.getCase(id).then((result) => {
-      setCaseData(result as ICase)
-    })
+      setCaseData(result as ICase);
+    });
   }, [id]);
 
   return (
