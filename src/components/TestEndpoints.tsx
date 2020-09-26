@@ -15,18 +15,12 @@ import {
   CaseStatus,
 } from '../types/types';
 import moment from 'moment';
+import { OneDriveAdapter } from '../adapters/OneDriveAdapter';
 
 const createFolder = async (history) => {
+  const oneDrive = new OneDriveAdapter();
   try {
-    const token = sessionStorage.getItem('token');
-    const response = await axios.post(
-      '/drive',
-      {
-        name: 'endpoint',
-        path: '',
-      },
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
+    const response = await oneDrive.getDrive;
     console.log(response);
   } catch (error) {
     console.log('error: ', error);

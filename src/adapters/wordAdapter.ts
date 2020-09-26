@@ -1,7 +1,5 @@
 import {
-  AlignmentType,
   Document,
-  HeadingLevel,
   Packer,
   Paragraph,
   TabStopPosition,

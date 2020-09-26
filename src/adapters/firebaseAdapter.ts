@@ -3,21 +3,21 @@ import { ICase } from '../types/types';
 // declare var window;
 export const firebase = window.firebase;
 
-export interface firebaseAdapter {
+export interface FirebaseAdapter {
   authenticate;
   addClient;
   addContact;
   getCollection;
   addCase;
-  getCase: ICase;
-  getCases: ICase[];
-  getCasesByInsurer: ICase;
+  getCase;
+  getCases: () => Promise<ICase[]>;
+  getCasesByInsurer: (insurer: string) => Promise<ICase[]>;
   deleteClient;
   deleteContact;
   deleteCase;
 }
 
-export const firebaseAdapter = {
+export const firebaseAdapter: FirebaseAdapter = {
   authenticate: async (provider) => {
     const { user, credential } = await firebase
       .auth()
@@ -51,7 +51,7 @@ export const firebaseAdapter = {
     return data;
   },
   getCases: async (): Promise<ICase[]> => {
-    return await firebaseAdapter
+    return firebaseAdapter
       .getCollection('cases')
       .get()
       .then((casesData) => {

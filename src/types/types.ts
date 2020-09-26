@@ -27,7 +27,7 @@ export enum CaseType {
   BURGLARY,
   WIND,
   FLOOD,
-  EXEDENT,
+  ACCIDENT,
   ALL_RISKS,
 }
 export enum PolicyType {}
