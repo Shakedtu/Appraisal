@@ -1,6 +1,6 @@
 import { ICase } from '../types/types';
 
-declare var window;
+// declare var window;
 export const firebase = window.firebase;
 
 export interface firebaseAdapter {
@@ -9,9 +9,9 @@ export interface firebaseAdapter {
   addContact;
   getCollection;
   addCase;
-  getCase;
-  getCases;
-  getCasesByInsurer;
+  getCase: ICase;
+  getCases: ICase[];
+  getCasesByInsurer: ICase;
   deleteClient;
   deleteContact;
   deleteCase;
@@ -50,7 +50,7 @@ export const firebaseAdapter = {
     const data = caseData.data();
     return data;
   },
-  getCases: async () => {
+  getCases: async (): Promise<ICase[]> => {
     return await firebaseAdapter
       .getCollection('cases')
       .get()
@@ -59,22 +59,22 @@ export const firebaseAdapter = {
         casesData.forEach((doc) => {
           let newCase: ICase = {
             id: doc.id,
-            ...doc.data()
-          };
+            ...doc.data(),
+          } as ICase;
 
           newState.push(newCase);
         });
         return newState;
       });
   },
-  getCasesByInsurer: async (insurer: string) => {
+  getCasesByInsurer: async (insurer: string): Promise<ICase[]> => {
     const casesRef = firebaseAdapter.getCollection('cases');
     const casesArray: ICase[] = [];
     const snapshot = await casesRef.where('client/name', '==', insurer).get();
     snapshot.forEach((doc) => {
       const caseData: ICase = {
         id: doc.id,
-        ...doc.data(),
+        ...(doc.data() as ICase),
       };
       casesArray.push(caseData);
       console.log(doc.id, '=>', doc.data());
