@@ -16,8 +16,8 @@ export interface MenuTabProps {
 }
 
 export enum CaseMenuTabs {
-  CONTACT_INFO = 'contact-info',
-  MORE_INFO = 'more-info',
+  CASE_INFO = 'case-info',
+  CONTACTS = 'contacts',
   BILL_INFO = 'bill-info',
   DOCUMENTS = 'documents',
 }
@@ -37,14 +37,14 @@ const CaseMenu: FunctionComponent<CaseMenuProps> = ({
   const onBack = () => history.goBack();
   const MenuTabs: MenuTabProps[] = [
     {
-      key: CaseMenuTabs.CONTACT_INFO,
+      key: CaseMenuTabs.CASE_INFO,
       icon: <SolutionOutlined />,
-      text: t('case.menu.item.contact-info'),
+      text: t('case.menu.item.case-info'),
     },
     {
-      key: CaseMenuTabs.MORE_INFO,
+      key: CaseMenuTabs.CONTACTS,
       icon: <SolutionOutlined />,
-      text: t('case.menu.item.more-info'),
+      text: t('case.menu.item.contacts'),
     },
     {
       key: CaseMenuTabs.BILL_INFO,
@@ -70,7 +70,7 @@ const CaseMenu: FunctionComponent<CaseMenuProps> = ({
       <PageHeader
         className="site-page-header"
         onBack={onBack}
-        title={t('case.header.title', { name: caseDoc.client.name })}
+        title={t('case.header.title', { name: caseDoc.clientName })}
       />
       <Menu mode="horizontal" selectedKeys={[selectedTab]} onSelect={onSelect}>
         {MenuTabs.map((tab) => MenuTab(tab))}

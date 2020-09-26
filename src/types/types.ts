@@ -38,7 +38,7 @@ export interface ICase {
   client: Client;
   policyType?: PolicyType;
   address?: Address;
-  createdAt: number;
+  createdAt: string;
   status: CaseStatus;
   comments?: string;
   contacts: Contact[];
@@ -63,8 +63,8 @@ export interface Contact {
   type: ContactType;
   name: string;
   phone: string;
-  address?: Address;
-  email?: string;
+  address: Address;
+  email: string;
   fax?: string;
 }
 export interface Address {

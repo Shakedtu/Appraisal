@@ -8,6 +8,7 @@ import { firebaseAdapter } from '../../adapters/firebaseAdapter';
 import { DownOutlined, UserOutlined } from '@ant-design/icons';
 import AddCaseModal from './AddCaseModal';
 import uid from 'uid';
+import moment from 'moment';
 
 const CaseTable: React.FunctionComponent = () => {
   const { t } = useTranslation();
@@ -53,7 +54,7 @@ const CaseTable: React.FunctionComponent = () => {
       dataIndex: 'address',
       title: t(`file-table.header.column.address`),
       render: (address) =>
-        `${address.city} ,${address.houseNumber} ${address.street}`,
+        `${address.street} ${address.houseNumber}, ${address.city}`,
     },
     {
       key: 'contacts',
@@ -62,8 +63,10 @@ const CaseTable: React.FunctionComponent = () => {
       render: (contacts) =>
         contacts.map((contact) => (
           <>
-            <Avatar icon={<UserOutlined />} key={uid()} />
-            {contact.name}
+            <p>
+              <Avatar icon={<UserOutlined />} key={uid()} />
+              {contact.name}
+            </p>
           </>
         )),
     },
@@ -91,7 +94,11 @@ const CaseTable: React.FunctionComponent = () => {
     </Menu>
   );
 
-  const onCreate = (newCase) => {
+  const onCreate = (values) => {
+    const newCase: ICase = {
+      ...values,
+      createdAt: moment().format('DD/MM/YYYY'),
+    };
     firebaseAdapter.addCase(newCase);
     console.log('Received values of form: ', newCase);
     setVisible(false);

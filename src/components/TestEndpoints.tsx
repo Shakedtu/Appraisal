@@ -4,6 +4,7 @@ import { Button } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import { firebaseAdapter } from '../adapters/firebaseAdapter';
+import wordAdapter from '../adapters/wordAdapter';
 import {
   Client,
   ICase,
@@ -13,6 +14,7 @@ import {
   Address,
   CaseStatus,
 } from '../types/types';
+import moment from 'moment';
 
 const createFolder = async (history) => {
   try {
@@ -88,7 +90,14 @@ const addContact = async () => {
     type: ContactType.INSURANCE_COMPANY,
     name: 'example',
     phone: '00',
+    address: {
+      street: 'רחוב',
+      houseNumber: '5',
+      city: 'תל אביב',
+    },
+    email: 'test@gmail.com',
   };
+
   console.log(await firebaseAdapter.addContact(contact));
 };
 
@@ -97,6 +106,12 @@ const addCase = async () => {
     type: ContactType.INSURANCE_COMPANY,
     name: 'example',
     phone: '00',
+    address: {
+      street: 'רחוב',
+      houseNumber: '5',
+      city: 'תל אביב',
+    },
+    email: 'test@gmail.com',
   };
 
   const client: Client = {
@@ -113,7 +128,7 @@ const addCase = async () => {
     type: CaseType.WATER,
     client: client,
     address: address,
-    createdAt: 0,
+    createdAt: moment().format('DD/MM/YYYY'),
     status: CaseStatus.NEW,
     comments: '',
     contacts: [contact],
@@ -154,6 +169,15 @@ const Endpoint = () => {
       </Button>
       <Button className="button" onClick={() => deleteClient()}>
         deleteClient
+      </Button>
+      <Button
+        className="button"
+        onClick={() => {
+          const word = new wordAdapter();
+          word.generateReceite();
+        }}
+      >
+        create doc
       </Button>
     </div>
   );

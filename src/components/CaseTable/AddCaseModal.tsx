@@ -30,7 +30,10 @@ const AddCaseModal = ({ visible, onCreate, onCancel }) => {
         title={t('case-table.buttons.new-case.title')}
         okText={t('case-table.buttons.new-case.title')}
         cancelText="Cancel"
-        onCancel={onCancel}
+        onCancel={() => {
+          setContactsList([]);
+          onCancel();
+        }}
         onOk={() => {
           form
             .validateFields()
@@ -89,7 +92,7 @@ const AddCaseModal = ({ visible, onCreate, onCancel }) => {
             </Form.Item>
             <Form.Item
               name="clientName"
-              label="שם לקוח"
+              label={t(`case-table.add-case-modal.client-name`)}
               rules={[
                 {
                   required: true,
@@ -97,7 +100,7 @@ const AddCaseModal = ({ visible, onCreate, onCancel }) => {
                 },
               ]}
             >
-              <Input type="textarea" placeholder="שם לקוח" />
+              <Input type="textarea" />
             </Form.Item>
             <Form.Item
               name="status"
@@ -140,13 +143,16 @@ const AddCaseModal = ({ visible, onCreate, onCancel }) => {
             >
               {contactsList.length ? (
                 <List
-                  itemLayout="horizontal"
+                  size="small"
                   dataSource={contactsList}
+                  itemLayout="vertical"
+                  bordered
+                  rowKey={uid()}
                   renderItem={(contact) => (
                     <List.Item key={uid()}>
                       <List.Item.Meta
                         avatar={<Avatar icon={<UserOutlined />} />}
-                        title={contact.name}
+                        title={`${contact.name} - ${contact.type}`}
                       />
                     </List.Item>
                   )}
@@ -157,14 +163,9 @@ const AddCaseModal = ({ visible, onCreate, onCancel }) => {
                 </Typography.Text>
               )}
             </Form.Item>
-            <Form.Item>
-              <Button
-                style={{ margin: '0 8px' }}
-                onClick={changeContactVisabillity}
-              >
-                {'הוסף איש קשר'}
-              </Button>
-            </Form.Item>
+            <Button onClick={changeContactVisabillity}>
+              {t(`case-table.add-contact-modal.buttons.add-contact`)}
+            </Button>
           </Form>
           <AddContactModal
             visible={contactVisible}

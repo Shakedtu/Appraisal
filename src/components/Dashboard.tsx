@@ -27,7 +27,7 @@ const Dashboard = () => {
           mode="inline"
           onSelect={onSelectedItem}
         >
-          <Menu.Item key='cases-list'>
+          <Menu.Item key="cases-list">
             {t('dashboard.item.case-table')}
           </Menu.Item>
           <Menu.Item key="tests">tests</Menu.Item>

@@ -59,15 +59,9 @@ export const firebaseAdapter = {
         casesData.forEach((doc) => {
           let newCase: ICase = {
             id: doc.id,
-            // type: doc.data().type,
-            // client: doc.data().client,
-            // address: doc.data().address,
-            // createdAt: doc.data().createdAt,
-            // status: doc.data().status,
-            // comments: doc.data().comments,
-            // contacts: doc.data().contacts,
-            ...doc.data(),
+            ...doc.data()
           };
+
           newState.push(newCase);
         });
         return newState;

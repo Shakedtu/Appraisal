@@ -1,10 +1,11 @@
 import React, { FunctionComponent, useState, useEffect } from 'react';
 import CaseMenu, { CaseMenuTabs } from './CaseMenu/CaseMenu';
-import ContactInfo from './ContactInfo';
+import CaseInfo from './CaseInfo';
 import Billing from './Billing';
-import MoreInfo from './MoreInfo';
+import Contacts from './Contacts';
 import { firebaseAdapter } from '../../adapters/firebaseAdapter';
 import { ICase, CaseType, CaseStatus } from '../../types/types';
+import moment from 'moment';
 
 const Case: FunctionComponent<{ match: { params: { id } } }> = ({
   match: {
@@ -12,7 +13,7 @@ const Case: FunctionComponent<{ match: { params: { id } } }> = ({
   },
 }) => {
   const [selectedTab, setSelectedTab] = useState<CaseMenuTabs>(
-    CaseMenuTabs.CONTACT_INFO
+    CaseMenuTabs.CASE_INFO
   );
 
   const [caseData, setCaseData] = useState<ICase>({
@@ -20,15 +21,15 @@ const Case: FunctionComponent<{ match: { params: { id } } }> = ({
     client: {
       name: 'ישראל ישראלי',
     },
-    createdAt: 0,
+    createdAt: moment().format('DD/MM/YYYY'),
     status: CaseStatus.NEW,
     comments: '',
     contacts: [],
   });
 
   const Tabs = {
-    [CaseMenuTabs.CONTACT_INFO]: <ContactInfo data={caseData} />,
-    [CaseMenuTabs.MORE_INFO]: <MoreInfo />,
+    [CaseMenuTabs.CASE_INFO]: <CaseInfo data={caseData} />,
+    [CaseMenuTabs.CONTACTS]: <Contacts contacts={caseData.contacts} />,
     [CaseMenuTabs.BILL_INFO]: <Billing data={caseData} />,
     // [CaseMenuTabs.DOCUMENTS]: <ContactInfo tab={CaseMenuTabs.DOCUMENTS} />,
   };

@@ -53,7 +53,9 @@ const AddContactModal: React.FC<ModalFormProps> = ({ visible, onCancel }) => {
             {Object.values(ContactType)
               .filter((type) => typeof type === 'string')
               .map((type) => (
-                <Radio value={type} key={uid()}>{type}</Radio>
+                <Radio value={type} key={uid()}>
+                  {type}
+                </Radio>
               ))}
           </Radio.Group>
         </Form.Item>
