@@ -15,7 +15,6 @@ const CaseTable: React.FunctionComponent = () => {
   const { Search } = Input;
   const [data, setData] = useState<ICase[]>([]);
   const [visible, setVisible] = useState(false);
-  const casesRef = firebaseAdapter.getCollection('cases');
   const columns: ColumnsType<ICase> = [
     {
       key: 'id',
@@ -73,13 +72,8 @@ const CaseTable: React.FunctionComponent = () => {
   ];
 
   useEffect(() => {
-    const getData = async () => {
-      const casesData: ICase[] = await firebaseAdapter.getCases();
-      setData(casesData);
-    };
-
-    getData();
-  }, [casesRef]);
+    firebaseAdapter.getCases().then(casesDate => setData(casesDate))
+  }, []);
 
   const insurerFilter = async ({ key }) => {
     const casesData = await firebaseAdapter.getCasesByInsurer(key);
