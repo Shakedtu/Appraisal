@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useState, useEffect } from 'react';
 import CaseMenu, { CaseMenuTabs } from './CaseMenu/CaseMenu';
-import CaseInfo from './CaseInfo';
+import CaseInfo from './CaseInfo/CaseInfo';
 import Billing from './Billing';
 import Contacts from './Contacts';
 import { firebaseAdapter } from '../../adapters/FirebaseAdapter';
