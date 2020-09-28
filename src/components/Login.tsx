@@ -4,7 +4,7 @@ import { WindowsFilled } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import MicrosoftProvider from '../Providers/MicrosoftProvider';
-import { firebaseAdapter } from '../adapters/firebaseAdapter';
+import { firebaseAdapter } from '../adapters/FirebaseAdapter';
 
 const startLogin = async (history) => {
   try {

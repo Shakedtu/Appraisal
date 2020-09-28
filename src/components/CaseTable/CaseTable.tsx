@@ -1,10 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Dropdown, Table, Input, Typography, Menu, Avatar } from 'antd';
+import {
+  Button,
+  Dropdown,
+  Table,
+  Input,
+  Typography,
+  Menu,
+  Avatar,
+  Spin,
+} from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { ICase } from '../../types/types';
-import { firebaseAdapter } from '../../adapters/firebaseAdapter';
+import { firebaseAdapter } from '../../adapters/FirebaseAdapter';
 import { DownOutlined, UserOutlined } from '@ant-design/icons';
 import AddCaseModal from './AddCaseModal';
 import uid from 'uid';
@@ -101,7 +110,9 @@ const CaseTable: React.FunctionComponent = () => {
   return (
     <>
       <Search placeholder={t('file-table.search.placeholder')} />
-      <Table dataSource={data} columns={columns} bordered />
+      <Spin spinning={data.length === 0}>
+        <Table dataSource={data} columns={columns} bordered />
+      </Spin>
       <Button
         type="primary"
         onClick={() => {

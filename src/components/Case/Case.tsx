@@ -3,7 +3,7 @@ import CaseMenu, { CaseMenuTabs } from './CaseMenu/CaseMenu';
 import CaseInfo from './CaseInfo';
 import Billing from './Billing';
 import Contacts from './Contacts';
-import { firebaseAdapter } from '../../adapters/firebaseAdapter';
+import { firebaseAdapter } from '../../adapters/FirebaseAdapter';
 import { ICase, CaseType, CaseStatus } from '../../types/types';
 import moment from 'moment';
 

@@ -1,4 +1,4 @@
-import { firebaseAdapter } from './firebaseAdapter';
+import { firebaseAdapter } from './FirebaseAdapter';
 import MicrosoftProvider from '../Providers/MicrosoftProvider';
 describe('firebase adapter', () => {
   it('should authenticate', async () => {

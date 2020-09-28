@@ -23,7 +23,7 @@ export const firebaseAdapter: FirebaseAdapter = {
       .auth()
       .signInWithPopup(provider);
     const token = credential?.['accessToken'];
-    sessionStorage.setItem('token', token);
+    localStorage.setItem('token', token);
     return token;
   },
   addClient: async (clientData) => {

@@ -17,7 +17,7 @@ const Dashboard = () => {
   const [currentKey, setCurrentKey] = useState('cases-list');
   const onSelectedItem = ({ key }) => setCurrentKey(key);
 
-  if (!sessionStorage.getItem('token')) history.push('/login');
+  if (!localStorage.getItem('token')) history.push('/login');
   return (
     <Layout>
       <Sider>

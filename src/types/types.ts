@@ -13,7 +13,13 @@ export enum CaseStatus {
   WAITING_FOR_PAYMENT,
   CLOSE,
 }
-export enum EventType {}
+export enum EventType {
+  START_OF_INSURANCE,
+  END_OF_INSURANCE,
+  SURVEY,
+  CASE,
+  VISIT
+}
 
 export enum ContactType {
   INSURANCE_COMPANY,

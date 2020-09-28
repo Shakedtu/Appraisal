@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Button } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
-import { firebaseAdapter } from '../adapters/firebaseAdapter';
+import { firebaseAdapter } from '../adapters/FirebaseAdapter';
 import wordAdapter from '../adapters/wordAdapter';
 import {
   Client,
@@ -29,7 +29,7 @@ const createFolder = async (history) => {
 
 const createFile = async (history) => {
   try {
-    const token = sessionStorage.getItem('token');
+    const token = localStorage.getItem('token');
     const response = await axios.put(
       '/drive/fileTest.txt',
       {
@@ -46,7 +46,7 @@ const createFile = async (history) => {
 
 const deleteFileorFolder = async (history) => {
   try {
-    const token = sessionStorage.getItem('token');
+    const token = localStorage.getItem('token');
     const config = {
       headers: { Authorization: `Bearer ${token}` },
       data: {
@@ -62,7 +62,7 @@ const deleteFileorFolder = async (history) => {
 
 const search = async (history) => {
   try {
-    const token = sessionStorage.getItem('token');
+    const token = localStorage.getItem('token');
     const response = await axios.get('/drive/endpoint', {
       headers: { Authorization: `Bearer ${token}` },
     });
