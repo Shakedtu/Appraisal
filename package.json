@@ -20,6 +20,7 @@
     "antd": "^4.5.3",
     "antd-dayjs-webpack-plugin": "^1.0.0",
     "axios": "^0.19.2",
+    "dayjs": "^1.9.0",
     "docx": "^5.3.0",
     "file-saver": "^2.0.2",
     "firebase": "^7.17.2",
@@ -42,7 +43,7 @@
   },
   "scripts": {
     "analyze": "source-map-explorer 'build/static/js/*.js'",
-    "prettier": "prettier --single-quote --write '{**/*,*}.{ts,tsx}'",
+    "prettier": "prettier --single-quote --write '{**/*,*}.{ts,tsx}' --loglevel silent",
     "start": "npm run prettier && craco start",
     "build": "craco build",
     "test": "craco test",

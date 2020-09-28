@@ -19,23 +19,29 @@ export enum EventType {
   SURVEY,
   CASE,
   VISIT,
+  REFFERENSE, //תאריך הפניה
+  LAST_DOCUMENT,
 }
 
 export enum ContactType {
   INSURANCE_COMPANY,
   INSURANCE_AGENT,
-  PRIVATE_CUSTOMER,
+  INSUREE,
 }
 
 export enum CaseType {
-  WATER,
-  FIRE,
-  BURGLARY,
-  WIND,
-  FLOOD,
-  ACCIDENT,
-  ALL_RISKS,
-}
+  WATER = 'water',
+  FIRE = 'fire',
+  BURGLARY = 'burglary',
+  ROBBERY = 'robbery',
+  WIND = 'wind',
+  EXPLOSION = 'explosion',
+  EARTHQUAKE = 'earthquake',
+  THIRD_PARTY = 'third-party',
+  FLOOD = 'flood',
+  ALL_RISKS = 'all-risks',
+  BUSINESS_OTHER = 'other',
+} // אש, גנבה, שיטפון, זדון, התפוצצות, רעידת אדמה, צד שלישי, אחר - עסקים
 export enum PolicyType {}
 export interface ICase {
   id?: string;

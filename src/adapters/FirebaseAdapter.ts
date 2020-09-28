@@ -19,9 +19,7 @@ export interface FirebaseAdapter {
 
 export const firebaseAdapter: FirebaseAdapter = {
   authenticate: async (provider) => {
-    const { user, credential } = await firebase
-      .auth()
-      .signInWithPopup(provider);
+    const { credential } = await firebase.auth().signInWithPopup(provider);
     const token = credential?.['accessToken'];
     localStorage.setItem('token', token);
     return token;

@@ -1,53 +1,77 @@
 import React, { FunctionComponent } from 'react';
-import { DatePicker, Form, Input, InputNumber, Select } from 'antd';
+import { Card, Col, DatePicker, Form, Input, Row, Select } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { CaseType, ICase } from '../../types/types';
 
 const CaseInfo: FunctionComponent<{ data: ICase }> = ({ data }) => {
   const { t } = useTranslation();
   const [form] = Form.useForm();
+  const caseTypeOptions = () => {
+    const caseTypes: CaseType[] = [
+      CaseType.THIRD_PARTY,
+      CaseType.ROBBERY,
+      CaseType.EXPLOSION,
+      CaseType.EARTHQUAKE,
+      CaseType.ALL_RISKS,
+      CaseType.BURGLARY,
+      CaseType.FIRE,
+      CaseType.FLOOD,
+      CaseType.WATER,
+      CaseType.WIND,
+      CaseType.BUSINESS_OTHER,
+    ];
+    return (
+      <>
+        {caseTypes.map((caseType: CaseType) => (
+          <Select.Option value={caseType} key={caseType}>
+            {t(`case.info.case-type.${caseType}`)}
+          </Select.Option>
+        ))}
+      </>
+    );
+  };
   return (
     <>
       <Form
-        labelCol={{ span: 2 }}
-        wrapperCol={{ span: 3 }}
+        labelCol={{ span: 4 }}
+        wrapperCol={{ span: 8 }}
         form={form}
-        layout="horizontal"
+        layout="vertical"
       >
-        <Form.Item label={'סוג תיק'}>
-          <Select>
-            <Select.Option value={CaseType.ACCIDENT}>תאונה</Select.Option>
-            <Select.Option value={CaseType.WATER}>מים</Select.Option>
-            <Select.Option value={CaseType.ALL_RISKS}>
-              כל הסיכונים
-            </Select.Option>
-            <Select.Option value={CaseType.BURGLARY}>פריצה</Select.Option>
-            <Select.Option value={CaseType.FIRE}>אש</Select.Option>
-            <Select.Option value={CaseType.FLOOD}>הצפה</Select.Option>
-            <Select.Option value={CaseType.WIND}>רוח</Select.Option>
-          </Select>
-        </Form.Item>
-        <Form.Item label={'מספר תיק'}>
-          <Input />
-        </Form.Item>
-        <Form.Item label={'שם המזמין'}>
-          <Input />
-        </Form.Item>
-        <Form.Item label={'שמאי מטפל'}>
-          <Input />
-        </Form.Item>
-        <Form.Item label={'תאריך פתיחה'}>
-          <DatePicker />
-        </Form.Item>
-        <Form.Item label={'מצב התיק'}>
-          <Input />
-        </Form.Item>
-        <Form.Item label={'מספר תביעה'}>
-          <Input />
-        </Form.Item>
-        <Form.Item label={'מספר פוליסה'}>
-          <Input />
-        </Form.Item>
+        <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+          <Col className="gutter-row" span={8} flex="auto">
+            <Card bordered={false}>
+              <Form.Item label={t('case.into.case-number')}>
+                <Input />
+              </Form.Item>
+              <Form.Item label={t('case.into.case-type.title')}>
+                <Select>{caseTypeOptions()}</Select>
+              </Form.Item>
+              <Form.Item label={t('case.into.client-name')}>
+                <Input />
+              </Form.Item>
+              <Form.Item label={t('case.into.appraiser')}>
+                <Input />
+              </Form.Item>
+              <Form.Item label={t('case.into.creation-date')}>
+                <DatePicker />
+              </Form.Item>
+              <Form.Item label={t('case.into.status')}>
+                <Input />
+              </Form.Item>
+            </Card>
+          </Col>
+          <Col className="gutter-row" span={8}>
+            <Card bordered={false}>
+              <Form.Item label={t('case.into.claim-number')}>
+                <Input />
+              </Form.Item>
+              <Form.Item label={t('case.into.policy-number')}>
+                <Input />
+              </Form.Item>
+            </Card>
+          </Col>
+        </Row>
       </Form>
     </>
   );
