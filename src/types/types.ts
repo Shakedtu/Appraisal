@@ -18,7 +18,7 @@ export enum EventType {
   END_OF_INSURANCE,
   SURVEY,
   CASE,
-  VISIT
+  VISIT,
 }
 
 export enum ContactType {

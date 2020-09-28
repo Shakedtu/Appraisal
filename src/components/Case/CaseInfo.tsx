@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
-import {DatePicker, Form, Input, InputNumber, Select} from 'antd';
+import { DatePicker, Form, Input, InputNumber, Select } from 'antd';
 import { useTranslation } from 'react-i18next';
-import {CaseType, ICase} from '../../types/types';
+import { CaseType, ICase } from '../../types/types';
 
 const CaseInfo: FunctionComponent<{ data: ICase }> = ({ data }) => {
   const { t } = useTranslation();
@@ -18,7 +18,9 @@ const CaseInfo: FunctionComponent<{ data: ICase }> = ({ data }) => {
           <Select>
             <Select.Option value={CaseType.ACCIDENT}>תאונה</Select.Option>
             <Select.Option value={CaseType.WATER}>מים</Select.Option>
-            <Select.Option value={CaseType.ALL_RISKS}>כל הסיכונים</Select.Option>
+            <Select.Option value={CaseType.ALL_RISKS}>
+              כל הסיכונים
+            </Select.Option>
             <Select.Option value={CaseType.BURGLARY}>פריצה</Select.Option>
             <Select.Option value={CaseType.FIRE}>אש</Select.Option>
             <Select.Option value={CaseType.FLOOD}>הצפה</Select.Option>
