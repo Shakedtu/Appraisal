@@ -17,7 +17,7 @@ import { firebaseAdapter } from '../../adapters/FirebaseAdapter';
 import { DownOutlined, UserOutlined } from '@ant-design/icons';
 import AddCaseModal from './AddCaseModal';
 import uid from 'uid';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 const CaseTable: React.FunctionComponent = () => {
   const { t } = useTranslation();
@@ -98,10 +98,18 @@ const CaseTable: React.FunctionComponent = () => {
   );
 
   const onCreate = (values) => {
+    const { type, clientName, address, contacts, status, ...rest } = values;
     const newCase: ICase = {
-      ...values,
-      createdAt: moment().format('DD/MM/YYYY'),
+      type: type,
+      client: {
+        name: clientName,
+      },
+      address: address,
+      createdAt: dayjs().format('DD/MM/YYYY'),
+      status: status,
+      contacts: contacts || [],
     };
+
     firebaseAdapter.addCase(newCase);
     console.log('Received values of form: ', newCase);
     setVisible(false);

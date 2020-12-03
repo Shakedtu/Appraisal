@@ -8,6 +8,7 @@ import {
 import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import './CaseMenu.scss';
+import { useQueryCache } from 'react-query';
 
 export interface MenuTabProps {
   key: string;
@@ -24,13 +25,13 @@ export enum CaseMenuTabs {
 interface CaseMenuProps {
   selectedTab: CaseMenuTabs;
   onSelect;
-  caseDoc;
+  clientName;
 }
 
 const CaseMenu: FunctionComponent<CaseMenuProps> = ({
   selectedTab,
   onSelect,
-  caseDoc,
+  clientName,
 }) => {
   const { t } = useTranslation();
   const history = useHistory();
@@ -65,15 +66,19 @@ const CaseMenu: FunctionComponent<CaseMenuProps> = ({
       </Menu.Item>
     );
   };
+  // const cache = useQueryCache();
+  // const data = cache.getQueryData('getCaseData');
+  // console.log('cm d', data);
+
   return (
     <>
       <PageHeader
         className="site-page-header"
         onBack={onBack}
-        title={t('case.header.title', { name: caseDoc.clientName })}
+        title={t('case.header.title', { name: clientName })}
       />
       <Menu mode="horizontal" selectedKeys={[selectedTab]} onSelect={onSelect}>
-        {MenuTabs.map((tab) => MenuTab(tab))}
+        {MenuTabs.map((tab: MenuTabProps) => MenuTab(tab))}
       </Menu>
     </>
   );

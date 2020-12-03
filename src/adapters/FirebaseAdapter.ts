@@ -1,14 +1,20 @@
-import { ICase } from '../types/types';
+import { ICase, ICaseInfo } from '../types/types';
+import uid from 'uid';
 
 // declare var window;
 export const firebase = window.firebase;
 
+// export interface updatedCaseInfo {
+//   id: string;
+//   caseInfo: ICaseInfo;
+// }
 export interface FirebaseAdapter {
   authenticate;
   addClient;
   addContact;
   getCollection;
   addCase;
+  updateCase: (dataToUpdate: ICaseInfo) => Promise<ICase>;
   getCase;
   getCases: () => Promise<ICase[]>;
   getCasesByInsurer: (insurer: string) => Promise<ICase[]>;
@@ -43,12 +49,17 @@ export const firebaseAdapter: FirebaseAdapter = {
     const docRef = await firebaseAdapter.getCollection('cases').add(caseData);
     return docRef.id;
   },
+  updateCase: ({ id, ...caseInfo }: ICaseInfo) => {
+    const casesCollection = firebaseAdapter.getCollection('cases');
+    const response = casesCollection.doc(id).update(caseInfo);
+    return response;
+  },
   getCase: async (id) => {
     const caseData = await firebaseAdapter.getCollection('cases').doc(id).get();
     const data = caseData.data();
-    return data;
+    return { id: id, ...data };
   },
-  getCases: async (): Promise<ICase[]> => {
+  getCases: (): Promise<ICase[]> => {
     return firebaseAdapter
       .getCollection('cases')
       .get()
@@ -80,18 +91,12 @@ export const firebaseAdapter: FirebaseAdapter = {
     return casesArray;
   },
   deleteClient: async (id: string) => {
-    const res = await firebaseAdapter.getCollection('clients').doc(id).delete();
-    console.log(res);
+    return firebaseAdapter.getCollection('clients').doc(id).delete();
   },
   deleteContact: async (id: string) => {
-    const res = await firebaseAdapter
-      .getCollection('contacts')
-      .doc(id)
-      .delete();
-    console.log(res);
+    return firebaseAdapter.getCollection('contacts').doc(id).delete();
   },
   deleteCase: async (id: string) => {
-    const res = await firebaseAdapter.getCollection('cases').doc(id).delete();
-    console.log(res);
+    return firebaseAdapter.getCollection('cases').doc(id).delete();
   },
 };

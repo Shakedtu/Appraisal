@@ -15,6 +15,13 @@ import { SmileOutlined, UserOutlined } from '@ant-design/icons';
 import { CaseType, CaseStatus, Contact } from '../../types/types';
 import AddContactModal from '../Case/AddContactModal';
 
+interface FormItemProps {
+  name: string;
+  label: string;
+  initialValue?: string;
+  rules?;
+}
+
 const AddCaseModal = ({ visible, onCreate, onCancel }) => {
   const { t } = useTranslation();
   const [form] = Form.useForm();

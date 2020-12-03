@@ -1,11 +1,12 @@
-import React, { FunctionComponent, useState, useEffect } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import CaseMenu, { CaseMenuTabs } from './CaseMenu/CaseMenu';
 import CaseInfo from './CaseInfo/CaseInfo';
 import Billing from './Billing';
 import Contacts from './Contacts';
 import { firebaseAdapter } from '../../adapters/FirebaseAdapter';
-import { ICase, CaseType, CaseStatus } from '../../types/types';
-import moment from 'moment';
+import { ICase } from '../../types/types';
+import { useQuery, ReactQueryCacheProvider, useQueryCache } from 'react-query';
+import { Spin } from 'antd';
 
 const Case: FunctionComponent<{ match: { params: { id } } }> = ({
   match: {
@@ -16,41 +17,38 @@ const Case: FunctionComponent<{ match: { params: { id } } }> = ({
     CaseMenuTabs.CASE_INFO
   );
 
-  const [caseData, setCaseData] = useState<ICase>({
-    type: CaseType.WATER,
-    client: {
-      name: 'ישראל ישראלי',
-    },
-    createdAt: moment().format('DD/MM/YYYY'),
-    status: CaseStatus.NEW,
-    comments: '',
-    contacts: [],
-  });
+  const getCaseData = () => firebaseAdapter.getCase(id);
+  const queryCache = useQueryCache();
+  const { data, isLoading } = useQuery('getCaseData', getCaseData);
+  // console.log('data from case', data);
+  // console.log('cached data', queryCache.getQueryData('getCaseData'));
 
   const Tabs = {
-    [CaseMenuTabs.CASE_INFO]: <CaseInfo data={caseData} />,
-    [CaseMenuTabs.CONTACTS]: <Contacts contacts={caseData.contacts} />,
-    [CaseMenuTabs.BILL_INFO]: <Billing data={caseData} />,
+    [CaseMenuTabs.CASE_INFO]: <CaseInfo />,
+    [CaseMenuTabs.CONTACTS]: <CaseInfo />,
+    [CaseMenuTabs.BILL_INFO]: <CaseInfo />,
     // [CaseMenuTabs.DOCUMENTS]: <ContactInfo tab={CaseMenuTabs.DOCUMENTS} />,
   };
-  const onSelectTab = ({ key }) => setSelectedTab(key);
 
-  useEffect(() => {
-    firebaseAdapter.getCase(id).then((result) => {
-      setCaseData(result as ICase);
-    });
-  }, [id]);
+  const onSelectTab = ({ key }) => {
+    console.log('ist');
+    setSelectedTab(key);
+  };
 
-  return (
-    <div>
-      <CaseMenu
-        selectedTab={selectedTab}
-        onSelect={onSelectTab}
-        caseDoc={caseData}
-      />
-      {Tabs[selectedTab]}
-    </div>
-  );
+  return isLoading ? (
+    <Spin />
+  ) : (
+      data && (
+        <div>
+          <CaseMenu
+            selectedTab={selectedTab}
+            onSelect={onSelectTab}
+            clientName={data.clientName}
+          />
+          {Tabs[selectedTab]}
+        </div>
+      )
+    );
 };
 
 export default Case;

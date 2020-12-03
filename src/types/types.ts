@@ -6,12 +6,12 @@ export enum PaymentType {
   TRAVEL_EXPENSES,
 }
 export enum CaseStatus {
-  NEW,
-  OPEN,
-  WAITING_FOR_FIRST_IMPRESSION,
-  WAITING_FOR_REPORT,
-  WAITING_FOR_PAYMENT,
-  CLOSE,
+  NEW = 'new',
+  OPEN = 'open',
+  WAITING_FOR_FIRST_IMPRESSION = 'waiting_for_first_impression',
+  WAITING_FOR_REPORT = 'waiting_for_report',
+  WAITING_FOR_PAYMENT = 'waiting_for_payment',
+  CLOSE = 'closed',
 }
 export enum EventType {
   START_OF_INSURANCE,
@@ -42,6 +42,7 @@ export enum CaseType {
   ALL_RISKS = 'all-risks',
   BUSINESS_OTHER = 'other',
 } // אש, גנבה, שיטפון, זדון, התפוצצות, רעידת אדמה, צד שלישי, אחר - עסקים
+
 export enum PolicyType {}
 export interface ICase {
   id?: string;
@@ -86,4 +87,12 @@ export interface Address {
 }
 export interface Client {
   name: string;
+}
+
+export interface ICaseInfo {
+  id?: string;
+  type: string;
+  client: Client;
+  createdAt: string;
+  status: string;
 }

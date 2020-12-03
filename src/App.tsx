@@ -4,12 +4,18 @@ import { Layout, Typography, Spin } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { AppPage, PagesRoutes } from './components/AppRouter/AppRouterConst';
+import {
+  ReactQueryCacheProvider,
+  useQueryCache,
+  QueryCache,
+} from 'react-query';
+
+const queryCache = new QueryCache();
 
 const App = () => {
   const { t } = useTranslation();
   const { Header, Content } = Layout;
   const { Title } = Typography;
-
   const Pages: AppPage[] = [
     {
       key: 'home',
@@ -58,11 +64,13 @@ const App = () => {
       <Content>
         <BrowserRouter>
           <Suspense fallback={<Spin />}>
-            <Switch>
-              {Pages.map((page: AppPage) => (
-                <Route exact {...page} />
-              ))}
-            </Switch>
+            <ReactQueryCacheProvider queryCache={queryCache}>
+              <Switch>
+                {Pages.map((page: AppPage) => (
+                  <Route exact {...page} />
+                ))}
+              </Switch>
+            </ReactQueryCacheProvider>
           </Suspense>
         </BrowserRouter>
       </Content>

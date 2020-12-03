@@ -14,7 +14,7 @@ import {
   Address,
   CaseStatus,
 } from '../types/types';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { OneDriveAdapter } from '../adapters/OneDriveAdapter';
 
 const createFolder = async (history) => {
@@ -122,7 +122,7 @@ const addCase = async () => {
     type: CaseType.WATER,
     client: client,
     address: address,
-    createdAt: moment().format('DD/MM/YYYY'),
+    createdAt: dayjs().format('DD/MM/YYYY'),
     status: CaseStatus.NEW,
     comments: '',
     contacts: [contact],
@@ -164,15 +164,15 @@ const Endpoint = () => {
       <Button className="button" onClick={() => deleteClient()}>
         deleteClient
       </Button>
-      <Button
+      {/* <Button
         className="button"
         onClick={() => {
           const word = new wordAdapter();
-          word.generateReceite();
+          word.generateDocFromTemplate();
         }}
       >
         create doc
-      </Button>
+      </Button> */}
     </div>
   );
 };
