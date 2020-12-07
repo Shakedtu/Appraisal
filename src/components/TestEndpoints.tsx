@@ -3,8 +3,7 @@ import axios from 'axios';
 import { Button } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
-import { firebaseAdapter } from '../adapters/FirebaseAdapter';
-import wordAdapter from '../adapters/wordAdapter';
+import { firebaseAdapter } from '../adapters/Firebase/FirebaseAdapter';
 import {
   Client,
   ICase,

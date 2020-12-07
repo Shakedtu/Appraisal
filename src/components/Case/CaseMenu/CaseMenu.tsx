@@ -8,7 +8,6 @@ import {
 import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import './CaseMenu.scss';
-import { useQueryCache } from 'react-query';
 
 export interface MenuTabProps {
   key: string;

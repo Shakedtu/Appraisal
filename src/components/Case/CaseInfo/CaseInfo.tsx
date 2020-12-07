@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useRef, FunctionComponent } from 'react';
+import React, { useState, FunctionComponent } from 'react';
 import { Button, Card, Col, Form, Input, Row, Select } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { CaseType, ICase, CaseStatus, ICaseInfo } from '../../../types/types';
 import { useQueryCache } from 'react-query';
 import dayjs from 'dayjs';
 import DatePicker from '../../DatePicker/DatePicker';
-import { firebaseAdapter } from '../../../adapters/FirebaseAdapter';
+import { firebaseAdapter } from '../../../adapters/Firebase/FirebaseAdapter';
 import { useParams } from 'react-router-dom';
 import { useMutation } from 'react-query';
 
@@ -21,7 +21,7 @@ const CaseInfo: FunctionComponent = () => {
     caseType: data?.type,
     clientName: data?.client.name,
     createdAt: dayjs(data?.createdAt, dateFormat),
-    status: data?.status
+    status: data?.status,
   });
 
   const [mutate] = useMutation(firebaseAdapter.updateCase, {
@@ -119,8 +119,8 @@ const CaseInfo: FunctionComponent = () => {
               ) : label === 'status' ? (
                 caseStatusDropdown()
               ) : (
-                      <Input />
-                    )}
+                <Input />
+              )}
             </Form.Item>
           );
         })}
@@ -133,7 +133,7 @@ const CaseInfo: FunctionComponent = () => {
       caseType: values.caseType,
       clientName: values.clientName,
       createdAt: values.createdAt,
-      status: values.status
+      status: values.status,
     });
 
     const caseInfo: ICaseInfo = formValues && {
@@ -165,7 +165,7 @@ const CaseInfo: FunctionComponent = () => {
         <Button
           type="primary"
           htmlType="submit"
-        // onClick={saveCaseChanges}
+          // onClick={saveCaseChanges}
         >
           שמור שינויים
         </Button>

@@ -1,0 +1,8 @@
+{
+  "appService.zipIgnorePattern": [
+    "node_modules{,/**}",
+    ".vscode{,/**}"
+  ],
+  "appService.defaultWebAppToDeploy": "/subscriptions/6a167263-b072-4ecb-9308-32c0f4e8eb67/resourceGroups/kamun-sikur/providers/Microsoft.Web/sites/kamun-sikur",
+  "appService.deploySubpath": "."
+}

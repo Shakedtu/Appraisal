@@ -1,13 +1,7 @@
-import { ICase, ICaseInfo } from '../types/types';
-import uid from 'uid';
+import { ICase, ICaseInfo } from '../../types/types';
+import firebase from 'firebase';
 
-// declare var window;
-export const firebase = window.firebase;
 
-// export interface updatedCaseInfo {
-//   id: string;
-//   caseInfo: ICaseInfo;
-// }
 export interface FirebaseAdapter {
   authenticate;
   addClient;

@@ -73,6 +73,7 @@ export interface Attachment {
   filename: string;
 }
 export interface Contact {
+  id?: string;
   type: ContactType;
   name: string;
   phone: string;

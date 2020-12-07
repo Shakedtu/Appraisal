@@ -13,7 +13,7 @@ import { ColumnsType } from 'antd/lib/table';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { ICase } from '../../types/types';
-import { firebaseAdapter } from '../../adapters/FirebaseAdapter';
+import { firebaseAdapter } from '../../adapters/Firebase/FirebaseAdapter';
 import { DownOutlined, UserOutlined } from '@ant-design/icons';
 import AddCaseModal from './AddCaseModal';
 import uid from 'uid';
@@ -98,7 +98,7 @@ const CaseTable: React.FunctionComponent = () => {
   );
 
   const onCreate = (values) => {
-    const { type, clientName, address, contacts, status, ...rest } = values;
+    const { type, clientName, address, contacts, status } = values;
     const newCase: ICase = {
       type: type,
       client: {

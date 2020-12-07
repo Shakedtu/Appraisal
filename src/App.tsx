@@ -4,11 +4,8 @@ import { Layout, Typography, Spin } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { AppPage, PagesRoutes } from './components/AppRouter/AppRouterConst';
-import {
-  ReactQueryCacheProvider,
-  useQueryCache,
-  QueryCache,
-} from 'react-query';
+import { ReactQueryCacheProvider, QueryCache } from 'react-query';
+
 
 const queryCache = new QueryCache();
 
