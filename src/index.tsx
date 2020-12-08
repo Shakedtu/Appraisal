@@ -6,6 +6,9 @@ import { ConfigProvider } from 'antd';
 import * as serviceWorker from './serviceWorker';
 import './i18n';
 import heIL from 'antd/es/locale/he_IL';
+import { firebaseAdapter } from './adapters/Firebase/FirebaseAdapter';
+
+firebaseAdapter.init();
 
 ReactDOM.render(
   <ConfigProvider locale={heIL} direction="rtl">

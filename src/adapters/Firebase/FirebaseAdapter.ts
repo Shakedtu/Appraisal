@@ -1,14 +1,15 @@
 import { ICase, ICaseInfo } from '../../types/types';
 import firebase from 'firebase';
 
-
 export interface FirebaseAdapter {
+  init;
   authenticate;
   addClient;
   addContact;
   getCollection;
   addCase;
   updateCase: (dataToUpdate: ICaseInfo) => Promise<ICase>;
+  updateContact: ({ id, contacts }) => Promise<ICase>;
   getCase;
   getCases: () => Promise<ICase[]>;
   getCasesByInsurer: (insurer: string) => Promise<ICase[]>;
@@ -18,6 +19,20 @@ export interface FirebaseAdapter {
 }
 
 export const firebaseAdapter: FirebaseAdapter = {
+  init: () => {
+    const firebaseConfig = {
+      apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+      appId: process.env.REACT_APP_FIREBASE_APP_ID,
+      projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+      authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+      databaseUrl: process.env.REACT_APP_FIREBASE_DATABASE_URL,
+      storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+      messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    if (!window.firebase) window.firebase = firebase;
+  },
   authenticate: async (provider) => {
     const { credential } = await firebase.auth().signInWithPopup(provider);
     const token = credential?.['accessToken'];
@@ -46,6 +61,11 @@ export const firebaseAdapter: FirebaseAdapter = {
   updateCase: ({ id, ...caseInfo }: ICaseInfo) => {
     const casesCollection = firebaseAdapter.getCollection('cases');
     const response = casesCollection.doc(id).update(caseInfo);
+    return response;
+  },
+  updateContact: ({ id, contacts }) => {
+    const casesCollection = firebaseAdapter.getCollection('cases');
+    const response = casesCollection.doc(id).update({ contacts });
     return response;
   },
   getCase: async (id) => {

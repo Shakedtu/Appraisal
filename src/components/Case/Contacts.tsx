@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Contact, ContactType, ICase, Address } from '../../types/types';
-import { Button, Input, Form, Table, Popconfirm } from 'antd';
+import { Button, Input, Form, Table, Popconfirm, Select } from 'antd';
 import { useTranslation } from 'react-i18next';
-import { useQueryCache } from 'react-query';
+import { useQueryCache, useMutation } from 'react-query';
 import { firebaseAdapter } from '../../adapters/Firebase/FirebaseAdapter';
+import { useParams } from 'react-router-dom';
 
 const Contacts: React.FunctionComponent = () => {
   const { t } = useTranslation();
@@ -13,6 +14,12 @@ const Contacts: React.FunctionComponent = () => {
   const isEditing = (record: TableItem) => record.key === editingKey;
   const data: ICase | undefined = queryCache.getQueryData('getCaseData');
   const { contacts } = data || {};
+  const { id } = useParams();
+
+  const [mutate] = useMutation(firebaseAdapter.updateContact, {
+    onSuccess: (updatedCase) =>
+      queryCache.setQueryData(['getCaseData', { id: id }], updatedCase),
+  });
 
   const tableDataSource: TableItem[] | undefined = contacts?.map(
     (contact, index) => {
@@ -40,21 +47,40 @@ const Contacts: React.FunctionComponent = () => {
   interface EditableCellProps {
     title: any;
     editable: boolean;
+    inputType: 'select' | 'text';
     children: React.ReactNode;
     dataIndex: string;
     record: TableItem;
-    // handleSave: (record: TableItem) => void;
   }
+
+  const contactTypeDropdown = () => {
+    const contactTypes: ContactType[] = [
+      ContactType.INSURANCE_AGENT,
+      ContactType.INSURANCE_COMPANY,
+      ContactType.INSUREE,
+    ];
+
+    return (
+      <Select>
+        {contactTypes.map((contactType: ContactType) => (
+          <Select.Option value={contactType} key={contactType}>
+            {t(`case.info.contact-type.${contactType}`)}
+          </Select.Option>
+        ))}
+      </Select>
+    );
+  };
 
   const EditableCell: React.FC<EditableCellProps> = ({
     editable,
     dataIndex,
     title,
+    inputType,
     record,
     children,
     ...restProps
   }) => {
-    // const inputNode = inputType === 'number' ? <InputNumber /> : <Input />;
+    const inputNode = inputType === 'text' ? <Input /> : contactTypeDropdown();
 
     return (
       <td {...restProps}>
@@ -69,7 +95,7 @@ const Contacts: React.FunctionComponent = () => {
               },
             ]}
           >
-            <Input />
+            {inputNode}
           </Form.Item>
         ) : (
           children
@@ -85,8 +111,17 @@ const Contacts: React.FunctionComponent = () => {
   const save = async (key: React.Key) => {
     try {
       const row = (await form.validateFields()) as Contact;
+      if (contacts !== undefined)
+        contacts.splice(parseInt(key.toString()), 1, row);
+      try {
+        await mutate({ id, contacts });
+      } catch (e) {
+        console.log(e);
+      }
     } catch (errInfo) {
       console.log('Validate Failed:', errInfo);
+    } finally {
+      setEditingKey('');
     }
   };
 
@@ -107,7 +142,7 @@ const Contacts: React.FunctionComponent = () => {
     {
       title: t(`case.contact-info.contacts.type`),
       dataIndex: 'type',
-      editable: false,
+      editable: true,
     },
     {
       title: t(`case.contact-info.contacts.address`),
@@ -163,6 +198,7 @@ const Contacts: React.FunctionComponent = () => {
       ...col,
       onCell: (record: TableItem) => ({
         record,
+        inputType: col.dataIndex === 'type' ? 'select' : 'text',
         dataIndex: col.dataIndex,
         title: col.title,
         editable: isEditing(record),

@@ -6,7 +6,6 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { AppPage, PagesRoutes } from './components/AppRouter/AppRouterConst';
 import { ReactQueryCacheProvider, QueryCache } from 'react-query';
 
-
 const queryCache = new QueryCache();
 
 const App = () => {

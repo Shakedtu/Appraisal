@@ -24,9 +24,9 @@ export enum EventType {
 }
 
 export enum ContactType {
-  INSURANCE_COMPANY,
-  INSURANCE_AGENT,
-  INSUREE,
+  INSURANCE_COMPANY = 'insurance_company',
+  INSURANCE_AGENT = 'insurance_agent',
+  INSUREE = 'insuree',
 }
 
 export enum CaseType {
